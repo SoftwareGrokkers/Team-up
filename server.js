@@ -39,11 +39,11 @@ app.listen(app.get("port"), function(){
 
 class login-signup{
 	
-	var process-signup = function(){
+	var authenticate-signup = function(){
 		// process signup
 	}
 	
-	var process-login = function(){
+	var authenticate-login = function(){
 		// process login
 	}
 	
@@ -58,12 +58,20 @@ class login-signup{
 
 
 
-class connect-to-database{
+class Database_Manager{
 	var create_db_connection = function(){
 		// connect to database
 	}
 	var close_db_connection = function(){
 		// close database connection
+	}
+	
+	var retrive_data = function(){
+		// retrives data
+	}
+	
+	var send_data = function(){
+		// sends data
 	}
 }
 
@@ -72,26 +80,23 @@ class Homepage{
 		// show user groups
 	}
 	
-	var sort-activites = function(){
-		// sort activites
+	var get-user-preferences = function(){
+		// get user preferences
 	}
 	
-	var get_activities-data = function(){
+	var log-out = function(){
 		// get activites data
 	}
 	
-	
-}
-class chat-room{
-	var create-chat-room = function(){
-		// create chat room
+	var login-signup = function(){
+		// show login/signup page
 	}
 	
-	var close-chat-room = function(){
-		
-	}
+	
 }
-class Group-chat{
+
+}
+class Groups{
 	var create-chat-room = function(){
 		// create chat room
 	}
@@ -100,50 +105,74 @@ class Group-chat{
 		// close chat room
 	}
 	
-	var get_activities = function(){
+	var go-to-homepage = function(){
 		//TODO
 	}
 	
 }
-class Private-chat{
+
+
+class Chat-Room{
 	var create-chat-room = function(){
 		// create chat room
 	}
 	
 	var close-chat-room = function(){
+		// close chat room
+	}
+	
+	var send-chat-data = function(){
+		// send chat data
+	}
+	
+	var retrive-chat-data = function(){
+		// retrieve chat data
+	}
+}
+
+class Chat-Manager{
+	var create_db_connection = function(){
+		// connect to database
+	}
+	var close_db_connection = function(){
+		// close database connection
+	}
+	
+	var retrive_data = function(){
+		// retrives data
+	}
+	
+	var send_data = function(){
+		// sends data
+	}
+}
+
+
+class User-preferences{
+	class Sort-Activities{
+		var sort-activites = function(){
+			// sort activites
+		}
 		
+		var get_activities = function(){
+			//TODO
+		}
+		
+		var sort-location = function(){
+			// sort location
+		}
+		var sort-time = function(){
+			// sort time
+		}
+	}
+	
+	class Search-Activities{
+		var search-activites = function(){
+			// search activities
+		}
+		var search-groups = function(){
+			// search groups
+		}
 	}
 }
 
-class Group{
-	var show-groups = function(){
-		// show user groups
-	}
-	
-}
-
-class Sort-Groups{
-	var sort-activites = function(){
-		// sort activites
-	}
-	
-	var get_activities = function(){
-		//TODO
-	}
-	
-	var sort-location = function(){
-		// sort location
-	}
-	var sort-time = function(){
-		// sort time
-	}
-}
-
-class search{
-	var search-activites = function(){
-		// search activities
-	}
-	var search-groups = function(){
-		// search groups
-	}
-}
