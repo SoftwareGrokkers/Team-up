@@ -5,6 +5,7 @@ var userBuilder = mongoose.Schema({
     firstname: String,
     lastname: String,
     email: String,
+    password: String,
     phone: String,
     street: String,
     city: String,
