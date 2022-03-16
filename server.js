@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+app.use(express.static(__dirname+'/frontEnd'))
 // var fs = require("fs")
 var credentials = require("./models/credentials.js")
 // var handlebars = require("express-handlebars").create({defaultLayout: "main"})
@@ -7,14 +8,16 @@ var Team_upUser = require("./Team-upSchema.js")
 // app.engine("handlebars", handlebars.engine)
 // app.set("view engine", "handlebars")
 app.use(require("body-parser")());
-
+const path = require('path')
 
 app.set('port', process.env.port || 3000)
-
+var mongoose = require('mongoose')
 // Kathan wuz here :)
 app.get('/', function(req, res){
-    // home page
-    res.write("<h1>Welcome to the home page</h1>")
+    // res.type('text/html')
+    // res.write("<h1>Welcome to the home page</h1>")
+    
+    res.sendFile(__dirname+'/index.html');
 });
 
 app.get('/activties', function(req,res){
@@ -23,10 +26,10 @@ app.get('/activties', function(req,res){
     
 })
 
-
+userConnectionString = credentials.mongo.db.connectionString
+mongoose.connect(userConnectionString)
 app.post('/process-login', function(req,res){
-    userConnectionString = credentials.mongo.db.connectionString
-    mongoose.connect(userConnectionString)
+    
     
     Team_upUser.find({email: req.body.email}, function(err, Team_upUser){
         if (err){
@@ -49,9 +52,8 @@ app.post('/process-login', function(req,res){
 
 app.post('/process-signup', function(req,res){
     //TODO use class instead
-    userConnectionString = credentials.mongo.db.connectionString
-    mongoose.connect(userConnectionString)
     
+    console.log(req.body.email)
     Team_upUser.find({email: req.body.email}, function(err, Team_upUser){
         if (err){
             //TODO handle error
@@ -70,8 +72,18 @@ app.post('/process-signup', function(req,res){
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            password: req.body.password //TODO encript password
+            password: req.body.password, //TODO encript password
+            phone: "",
+            street: "",
+            city: "",
+            state: "",
+            zipcode: "",
+            activity: "",
+        }).save(function(err, a){
+            if(err) return res.send(500, "Error occured: database error")
+            res.json({id:a._id})
         })
+        console.log("success!")
     })
     
     
