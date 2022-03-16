@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="TeamUpLogo.png" type="image/icon type" />
+    <title>Team Up</title>
+  </head>
+  <body>
+    <div class="box" id="box">
+      <div id="signUp" class="forms">
+        <form action="/process-signup" method="POST">
+          <br />
+          <img src="TeamUpLogo2.png" alt="" width="100" height="100" />
+          <h2 class="accountText">Create Account</h2>
+          <input id="" type="text" placeholder="First Name" name="firstname" required/>
+          <input type="text" placeholder="Last Name" name="lastname" required/>
+          <input type="email" placeholder="Email" name="email" required/>
+          <input type="password" placeholder="Password" name="password" required/>
+          <button>Sign Up</button>
+        </form>
+      </div>
+      <div id="logIn" class="forms">
+        <form action="/process-login" method="POST">
+          <br />
+          <img src="TeamUpLogo2.png" alt="" width="100" height="100" />
+          <h2 class="accountText">Log In</h2>
+          <input type="email" placeholder="Email" name="email" required/>
+          <input type="password" placeholder="Password" name="password" required/>
+          <button>Log In</button>
+        </form>
+      </div>
+      <div class="overlayBox">
+        <div class="overlay">
+          <div class="overlayPanels" id="logInOverlay">
+            <h2>Have an account?</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
+              itaque!
+            </p>
+            <button id="logInTransition">Log In</button>
+          </div>
+          <div class="overlayPanels" id="signUpOverlay">
+            <h2>Don't have an account?</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <button id="signUpTransition">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
