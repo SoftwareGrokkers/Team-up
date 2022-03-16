@@ -4,7 +4,7 @@ app.use(express.static(__dirname+'/frontEnd'))
 // var fs = require("fs")
 var credentials = require("./models/credentials.js")
 // var handlebars = require("express-handlebars").create({defaultLayout: "main"})
-var Team_upUser = require("./Team-upSchema.js")
+var Team_upUsers = require("./Team-upSchema.js")
 // app.engine("handlebars", handlebars.engine)
 // app.set("view engine", "handlebars")
 app.use(require("body-parser")());
@@ -31,7 +31,7 @@ mongoose.connect(userConnectionString)
 app.post('/process-login', function(req,res){
     
     
-    Team_upUser.find({email: req.body.email}, function(err, Team_upUser){
+    Team_upUsers.find({email: req.body.email}, function(err, Team_upUser){
         if (err){
             //TODO handle error
             console.log(err);
@@ -40,6 +40,7 @@ app.post('/process-login', function(req,res){
         
         if(Team_upUser[0].password === req.body.password){
             console.log("login successful")
+            res.write("<h1>Welcome to the home page</h1>")
         }
         else{
             console.log("incorrect password")
@@ -47,14 +48,15 @@ app.post('/process-login', function(req,res){
         
         
     })
+    //TODO catch err
     
 })
 
 app.post('/process-signup', function(req,res){
     //TODO use class instead
     
-    console.log(req.body.email)
-    Team_upUser.find({email: req.body.email}, function(err, Team_upUser){
+    // console.log(req.body.email)
+    Team_upUsers.find({email: req.body.email}, function(err, Team_upUser){
         if (err){
             //TODO handle error
             console.log(err);                     
@@ -68,7 +70,7 @@ app.post('/process-signup', function(req,res){
             return;
         }
         
-        new Team_upUser({
+        new Team_upUsers({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
@@ -84,6 +86,7 @@ app.post('/process-signup', function(req,res){
             res.json({id:a._id})
         })
         console.log("success!")
+        // TODO catch err
     })
     
     
