@@ -1,0 +1,28 @@
+{
+  "name": "softwaregrokkers",
+  "version": "1.0.0",
+  "description": "CSC3380 Group Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoftwareGrokkers/Team-up.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoftwareGrokkers/Team-up/issues"
+  },
+  "homepage": "https://github.com/SoftwareGrokkers/Team-up#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "express3-handlebars": "^0.5.2",
+    "mongodb": "^4.4.1",
+    "mongoose": "^6.2.6"
+  }
+}
