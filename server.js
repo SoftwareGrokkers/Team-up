@@ -1,8 +1,15 @@
+//TODO validate email
+// send emails to new users
+// change cookie on login and logout
+// encript password
+// handle errors
+
 var express = require('express')
 var app = express()
 app.use(express.static(__dirname+'/frontEnd'))
 // var fs = require("fs")
 var credentials = require("./models/credentials.js")
+var passwordEncrypter = require("./models/passwordEncrypter.js")
 // var handlebars = require("express-handlebars").create({defaultLayout: "main"})
 var Team_upUsers = require("./Team-upSchema.js")
 // app.engine("handlebars", handlebars.engine)
@@ -38,7 +45,7 @@ app.post('/process-login', function(req,res){
             return;
         }
         
-        if(Team_upUser[0].password === req.body.password){
+        if(passwordEncrypter.comparePassword(req.body.password,Team_upUser[0].password)){
             console.log("login successful")
             res.write("<h1>Welcome to the home page</h1>")
         }
@@ -70,11 +77,14 @@ app.post('/process-signup', function(req,res){
             return;
         }
         
+        var encryptedPassword = passwordEncrypter.encryptPassword(req.body.password)
+        
+        
         new Team_upUsers({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            password: req.body.password, //TODO encript password
+            password: encryptedPassword, //TODO encript password
             phone: "",
             street: "",
             city: "",
