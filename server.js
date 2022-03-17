@@ -50,7 +50,8 @@ app.post('/process-login', function(req,res){
             res.write("<h1>Welcome to the home page</h1>")
         }
         else{
-            console.log("incorrect password")
+            var print = document.getElementById('incorrectPassword');
+			print.appendChild("Incorrect Username or Password");
         }
         
         
