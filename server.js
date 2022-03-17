@@ -5,7 +5,14 @@
 // handle errors
 
 var express = require('express')
+
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+const flash = require('connect-flash')
 var app = express()
+app.use(cookieParser('secret')); //TODO move to models
+app.use(session({cookie: { maxAge: 60000 }}));
+app.use(flash());
 app.use(express.static(__dirname+'/frontEnd'))
 // var fs = require("fs")
 var credentials = require("./models/credentials.js")
@@ -15,7 +22,9 @@ var Team_upUsers = require("./Team-upSchema.js")
 // app.engine("handlebars", handlebars.engine)
 // app.set("view engine", "handlebars")
 app.use(require("body-parser")());
+
 const path = require('path')
+
 
 app.set('port', process.env.port || 3000)
 var mongoose = require('mongoose')
@@ -26,6 +35,8 @@ app.get('/', function(req, res){
     
     res.sendFile(__dirname+'/index.html');
 });
+
+
 
 app.get('/activties', function(req,res){
     //TODO
@@ -39,22 +50,27 @@ app.post('/process-login', function(req,res){
     
     
     Team_upUsers.find({email: req.body.email}, function(err, Team_upUser){
-        if (err){
-            //TODO handle error
-            console.log(err);
-            return;
-        }
+        
         
         if(passwordEncrypter.comparePassword(req.body.password,Team_upUser[0].password)){
             console.log("login successful")
+            // res.redirect(303, '/home.html')
             res.write("<h1>Welcome to the home page</h1>")
         }
         else{
-            var print = document.getElementById('incorrectPassword');
-			print.appendChild("Incorrect Username or Password");
+            // var print = document.getElementById('incorrectPassword');
+            // var text = document.createTextNode('incorrect username or password');
+			// print.appendChild(text);
+            
+            res.redirect(303,'/incorrectLogin')
+            
         }
         
-        
+        if (err){
+            //TODO handle error
+            //console.log(err);
+            return;
+        }
     })
     //TODO catch err
     
@@ -109,7 +125,9 @@ app.post('upload-activty', function(req,res){
     
 })
 
-
+app.get('/incorrectLogin', function(req,res){
+    res.sendFile(__dirname+'/frontEnd/indexIncorrect.html')
+})
 app.use(function(req, res){
 	
 	res.status(404)

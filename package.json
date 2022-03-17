@@ -20,8 +20,11 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
+    "express-session": "^1.17.2",
     "express3-handlebars": "^0.5.2",
     "mongodb": "^4.4.1",
     "mongoose": "^6.2.7"
