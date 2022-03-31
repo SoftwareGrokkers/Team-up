@@ -27,6 +27,7 @@
     "express-session": "^1.17.2",
     "express3-handlebars": "^0.5.2",
     "mongodb": "^4.4.1",
-    "mongoose": "^6.2.7"
+    "mongoose": "^6.2.7",
+    "xmlhttprequest": "^1.8.0"
   }
 }

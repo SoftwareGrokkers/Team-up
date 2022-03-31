@@ -4,6 +4,7 @@ var userBuilder = mongoose.Schema({
 	
     firstname: String,
     lastname: String,
+    gender: String,
     email: String,
     password: String,
     phone: String,
@@ -11,7 +12,7 @@ var userBuilder = mongoose.Schema({
     city: String,
     state: String,
     zipcode: Number,
-    activity: String,
+    activity: Array,
     
 });
 

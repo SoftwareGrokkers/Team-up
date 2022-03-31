@@ -13,7 +13,8 @@ var app = express()
 app.use(cookieParser('secret')); //TODO move to models
 app.use(session({cookie: { maxAge: 60000 }}));
 app.use(flash());
-app.use(express.static(__dirname+'/frontEnd'))
+app.use(express.static(__dirname+'/frontEnd')) //TODO figure this out
+frontEndPath = __dirname+'/frontEnd'
 // var fs = require("fs")
 var credentials = require("./models/credentials.js")
 var passwordEncrypter = require("./models/passwordEncrypter.js")
@@ -33,10 +34,12 @@ app.get('/', function(req, res){
     // res.type('text/html')
     // res.write("<h1>Welcome to the home page</h1>")
     
-    res.sendFile(__dirname+'/index.html');
+    res.sendFile(frontEndPath+'/index.html');
 });
 
-
+app.get('/home', function(req,res){
+    res.sendFile(frontEndPath+'/home.html');
+})
 
 app.get('/activties', function(req,res){
     //TODO
@@ -48,34 +51,97 @@ userConnectionString = credentials.mongo.db.connectionString
 mongoose.connect(userConnectionString)
 app.post('/process-login', function(req,res){
     
+    // user_details = {
+        // 'email': req.body.email,
+        // 'password': req.body.password
+    // }
+    
+    // try{
+        // var login_check = user_login(Team_upUsers,user_details)
+        // console.log("login_check",login_check)
+        // if (login_check){
+            // res.redirect('/home')
+        // }
+        // else{
+            // res.redirect('/incorrectLogin')
+        // }
+    // }
+    // catch(e){
+        // res.redirect('/incorrectLogin')
+        // console.log(e)
+    // }
     
     Team_upUsers.find({email: req.body.email}, function(err, Team_upUser){
-        
-        
-        if(passwordEncrypter.comparePassword(req.body.password,Team_upUser[0].password)){
+        // console.log(Team_upUser)
+        if ((Team_upUser == null) || (Team_upUser.length == 0)){
+            console.log("user doesn't exist")
+            res.redirect('/incorrectLogin')
+        }
+        else if(passwordEncrypter.comparePassword(req.body.password,Team_upUser[0].password)){
             console.log("login successful")
-            // res.redirect(303, '/home.html')
-            res.write("<h1>Welcome to the home page</h1>")
+            //TODO add cookie for successful login
+            res.redirect('/home')
+            // res.write("<h1>Welcome to the home page</h1>")
         }
         else{
             // var print = document.getElementById('incorrectPassword');
             // var text = document.createTextNode('incorrect username or password');
-			// print.appendChild(text);
+            // print.appendChild(text);
             
-            res.redirect(303,'/incorrectLogin')
+            res.redirect('/incorrectLogin')
             
         }
         
-        if (err){
-            //TODO handle error
-            //console.log(err);
-            return;
-        }
+        // if (err){
+            // //TODO handle error
+            // //console.log(err);
+            // return;
+        // }
     })
-    //TODO catch err
+    // catch(error){
+        // res.redirect('/incorrectLogin')
+        // console.log(error)
+    // }
+    // TODO catch err
     
 })
-
+var user_login = function(Team_upUsers,user_details){
+    var check = false
+    Team_upUsers.find({email: user_details.email}, function(err, Team_upUser){
+        
+        if (err){
+            console.log(err)
+            return
+        }
+        if(Team_upUser.length == 0){
+            console.log("user doesn't exist")
+            return
+        }
+        if(passwordEncrypter.comparePassword(user_details.password,Team_upUser[0].password)){
+            console.log("login successful")
+            //TODO add cookie for successful login
+            // res.redirect('/home')
+            check = true
+            // res.write("<h1>Welcome to the home page</h1>")
+        }
+        // else{
+            // // var print = document.getElementById('incorrectPassword');
+            // // var text = document.createTextNode('incorrect username or password');
+            // // print.appendChild(text);
+            // check = false
+            // // res.redirect('/incorrectLogin')
+            
+        // }
+        
+        // if (err){
+            // //TODO handle error
+            // //console.log(err);
+            // return;
+        // }
+    })
+    
+    return check
+}
 app.post('/process-signup', function(req,res){
     //TODO use class instead
     
@@ -126,7 +192,7 @@ app.post('upload-activty', function(req,res){
 })
 
 app.get('/incorrectLogin', function(req,res){
-    res.sendFile(__dirname+'/frontEnd/indexIncorrect.html')
+    res.sendFile(frontEndPath+'/indexIncorrect.html') //TODO fix
 })
 app.use(function(req, res){
 	
