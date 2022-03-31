@@ -10,21 +10,29 @@ body {
   margin: 1.8em 0.4em;
 }
 
-.fa-bars {
+.fa-bars,
+.fa-x {
   margin-top: 15px;
 }
 
-.fa-gear {
+.nav .fa-gear {
   position: absolute;
   bottom: 4.2em;
 }
 
-.fa-arrow-right-from-bracket {
+#settings {
+  position: absolute;
+  bottom: 6em;
+}
+
+.nav .fa-arrow-right-from-bracket,
+#logout {
   position: absolute;
   bottom: 0em;
 }
 
-.nav {
+.nav,
+.navFull {
   background: #121212;
   border: 1px #121212 solid;
   display: flex;
@@ -33,6 +41,16 @@ body {
   bottom: 0;
   left: 0;
   height: 93vh;
+}
+
+.navFull {
+  width: 15vw;
+  transition: all 0.3s linear;
+  transform: translateX(-100%);
+}
+
+.showNav {
+  transform: translateX(0);
 }
 
 .topBanner {
@@ -44,7 +62,7 @@ body {
   );
   width: 100vw;
   height: 7vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 
@@ -57,14 +75,25 @@ body {
   color: white;
 }
 
-.navFull {
-  background: 121212;
-  border: 1px #121212 solid;
+.navFull p {
+  display: inline;
+  color: white;
+  font-size: 1.5em;
+  margin-left: 0.5em;
+}
+
+#groups {
+  width: 93vw;
+  height: 100vh;
+  padding: 100px;
   display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 93vh;
-  width: 30vw;
+  flex-wrap: wrap
+}
+
+.group{
+  background-color: lightgray;
+  width: 25vw;
+  margin-right: 30px;
+  height:25vh;
+  border-radius: 10px;
 }
