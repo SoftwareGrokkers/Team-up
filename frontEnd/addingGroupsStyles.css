@@ -82,32 +82,28 @@ body {
   margin-left: 0.5em;
 }
 
-#groups,
-#activities {
-  width: 43vw;
-  padding: 5% 0 0 5%;
+/* Group Page */
+
+.container {
+  height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-  float: left;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
 }
 
-.group,
-.activity {
-  background-color: lightgray;
-  width: 25vw;
-  margin-right: 30px;
-  height: 25vh;
+.createGroup,
+.createActivity {
+  background-color: aqua;
   border-radius: 10px;
-  margin: 30px;
+  height: 50vh;
+  width: 30vw;
+  position: absolute;
+  left: 35%;
 }
 
-.groupActivityTitles {
-  width: 43vw;
-  text-align: center;
-}
-
-.group h1,
-.group h1 {
-  text-align: center;
+.createActivity {
+  z-index: -2;
 }
