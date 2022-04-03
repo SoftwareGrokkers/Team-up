@@ -176,16 +176,10 @@ button {
   font-size: 12px;
   font-weight: bold;
   padding: 10px 40px;
-  margin: 11px;
+  margin: 5px;
   text-transform: uppercase;
 }
 
 .forms button {
-  
-}
-
-#incorrectPassword {
-  color: red;
-  font-family: "Arial";
-  margin: .4em;
+  margin: 8px;
 }

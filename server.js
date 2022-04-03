@@ -47,6 +47,37 @@ app.get('/activties', function(req,res){
     
 })
 
+//not tested!!!!
+app.get('/userData', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.json({})
+        console.log("not logged in")
+    }
+    console.log("User cookie: ",userCookie.userEmail)
+    // if (userCookie.length > 0){
+        // console.log("here")
+        // Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
+            // console.log(Team_upUser)
+            // if ((Team_upUser == null) || (Team_upUser.length == 0)){
+            // console.log("user doesn't exist")
+            // res.redirect('/incorrectLogin')
+            // }
+            // else{
+                // // console.log("here")
+                // res.json(Team_upUser.activites)
+            // }
+        // })
+    // }
+    Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
+        console.log(Team_upUser)
+        res.json(Team_upUser.activity)
+    })
+    
+})
+
 userConnectionString = credentials.mongo.db.connectionString
 mongoose.connect(userConnectionString)
 app.post('/process-login', function(req,res){
@@ -80,7 +111,9 @@ app.post('/process-login', function(req,res){
         else if(passwordEncrypter.comparePassword(req.body.password,Team_upUser[0].password)){
             console.log("login successful")
             //TODO add cookie for successful login
+            res.cookie("userEmail",req.body.email,{maxAge:360000})
             res.redirect('/home')
+            
             // res.write("<h1>Welcome to the home page</h1>")
         }
         else{
@@ -197,14 +230,14 @@ app.get('/incorrectLogin', function(req,res){
 app.use(function(req, res){
 	
 	res.status(404)
-	res.render('404')
+	res.send('404')
 })
 
 
 app.use(function(err, req, res, next){
 	console.error(err.stack)
 	res.status(500)
-	res.render("500")
+	res.send("500")
 })
 
 app.listen(app.get("port"), function(){
