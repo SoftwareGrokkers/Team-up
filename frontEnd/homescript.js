@@ -13,11 +13,16 @@ navClose.addEventListener("click", () => {
 
 
 // Loop through groups and add square boxes
-// var groupsData = [{ "Name": "CSC 3380", "description": "Hello" }, { "Name": "Soccer", "description": "hello soccer" }, {}]
+var groupsData = [{ "Name": "CSC 3380", "description": "Hello" }, { "Name": "Soccer", "description": "hello soccer" }, {}]
 
-// for (let i = 0; i < groupsData.length; i++) {
-//   var allGroupsDiv = document.getElementById('groups');
-//   var groupdiv = document.createElement('div');
-//   groupdiv.classList.add('group');
-//   allGroupsDiv.appendChild(groupdiv);
-// }
+for (let i = 0; i < groupsData.length; i++) {
+  var allGroupsDiv = document.getElementById('groups');
+  var groupdiv = document.createElement('div');
+  groupdiv.classList.add('group');
+
+  var groupName = document.createElement("h1");
+  groupName.appendChild(document.createTextNode(groupsData[i].Name));
+
+  groupdiv.appendChild(groupName);
+  allGroupsDiv.appendChild(groupdiv);
+}
