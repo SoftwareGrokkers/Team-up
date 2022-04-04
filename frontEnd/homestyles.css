@@ -44,7 +44,7 @@ body {
 }
 
 .navFull {
-  width: 15vw;
+  width: 12vw;
   transition: all 0.3s linear;
   transform: translateX(-100%);
 }
@@ -82,18 +82,32 @@ body {
   margin-left: 0.5em;
 }
 
-#groups {
-  width: 93vw;
-  height: 100vh;
-  padding: 100px;
+#groups,
+#activities {
+  width: 43vw;
+  padding: 5% 0 0 5%;
   display: flex;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  float: left;
+  justify-content: center;
 }
 
-.group{
+.group,
+.activity {
   background-color: lightgray;
   width: 25vw;
   margin-right: 30px;
-  height:25vh;
+  height: 25vh;
   border-radius: 10px;
+  margin: 30px;
+}
+
+.groupActivityTitles {
+  width: 43vw;
+  text-align: center;
+}
+
+.group h1,
+.group h1 {
+  text-align: center;
 }

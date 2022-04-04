@@ -13,11 +13,48 @@ navClose.addEventListener("click", () => {
 
 
 // Loop through groups and add square boxes
+// console.log(document.cookie);
+var getUserCookie = function(){
+    rawCookie = document.cookie
+    goodCookie = rawCookie.replace("%40","@")
+    return goodCookie
+    
+}
+
+var userCookie = getUserCookie()
+var request = new XMLHttpRequest();
+const userGroupsUrl = `http://localhost:3000/userGroups?cookie=${userCookie}`
+const userActivitiesUrl = `http://localhost:3000/userActivities?cookie=${userCookie}`
+request.open('GET',userGroupsUrl,false)
+request.send()
+// console.log(request.responseText)
+var groupsData = JSON.parse(request.responseText);
+var request = new XMLHttpRequest();
+request.open('GET',userActivitiesUrl,false)
+request.send()
+
+var activitiesData = JSON.parse(request.responseText)
 // var groupsData = [{ "Name": "CSC 3380", "description": "Hello" }, { "Name": "Soccer", "description": "hello soccer" }, {}]
 
-// for (let i = 0; i < groupsData.length; i++) {
-//   var allGroupsDiv = document.getElementById('groups');
-//   var groupdiv = document.createElement('div');
-//   groupdiv.classList.add('group');
-//   allGroupsDiv.appendChild(groupdiv);
-// }
+for (let i = 0; i < groupsData.length; i++) {
+  var allGroupsDiv = document.getElementById('groups');
+  var groupdiv = document.createElement('div');
+  groupdiv.classList.add('group');
+
+  var groupName = document.createElement("h1");
+  groupName.appendChild(document.createTextNode(groupsData[i].Name));
+
+  groupdiv.appendChild(groupName);
+  allGroupsDiv.appendChild(groupdiv);
+}
+for (let i = 0; i < activitiesData.length; i++) {
+  var allGroupsDiv = document.getElementById('activities');
+  var groupdiv = document.createElement('div');
+  groupdiv.classList.add('activity');
+
+  var groupName = document.createElement("h1");
+  groupName.appendChild(document.createTextNode(activitiesData[i].Name));
+
+  groupdiv.appendChild(groupName);
+  allGroupsDiv.appendChild(groupdiv);
+}

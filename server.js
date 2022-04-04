@@ -38,7 +38,16 @@ app.get('/', function(req, res){
 });
 
 app.get('/home', function(req,res){
-    res.sendFile(frontEndPath+'/home.html');
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    else{
+        res.sendFile(frontEndPath+'/home.html');
+    }
 })
 
 app.get('/activties', function(req,res){
@@ -48,15 +57,15 @@ app.get('/activties', function(req,res){
 })
 
 //not tested!!!!
-app.get('/userData', function(req,res){
+app.get('/userActivities', function(req,res){
     var userCookie = req.cookies
     
     
     if (userCookie.userEmail == null){
-        res.json({})
+        res.redirect('/')
         console.log("not logged in")
     }
-    console.log("User cookie: ",userCookie.userEmail)
+    // console.log("User cookie: ",userCookie.userEmail)
     // if (userCookie.length > 0){
         // console.log("here")
         // Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
@@ -72,14 +81,192 @@ app.get('/userData', function(req,res){
         // })
     // }
     Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
-        console.log(Team_upUser)
-        res.json(Team_upUser.activity)
+        // console.log(Team_upUser[0]['activities'])
+        // console.log("activity: ",Team_upUser[0].activities)
+        res.json(Team_upUser[0].activities)
     })
+    
+})
+
+app.get('/userGroups', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    // console.log("User cookie: ",userCookie.userEmail)
+    // if (userCookie.length > 0){
+        // console.log("here")
+        // Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
+            // console.log(Team_upUser)
+            // if ((Team_upUser == null) || (Team_upUser.length == 0)){
+            // console.log("user doesn't exist")
+            // res.redirect('/incorrectLogin')
+            // }
+            // else{
+                // // console.log("here")
+                // res.json(Team_upUser.activites)
+            // }
+        // })
+    // }
+    Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
+        
+        // res.json(Team_upUser.groups) // Change this back to groups!!
+        // console.log(Team_upUser.activity)
+        res.json(Team_upUser[0].groups)
+    })
+    
+})
+
+app.get('/searchGroupsAndActivitiesPage', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        res.sendFile(frontEndPath+'/index.html');
+    }
+    
+})
+
+app.post('/searchGroupsAndActivities', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        res.sendFile(frontEndPath+'/index.html');
+    }
+    
+})
+
+app.get('/createGroupsAndActivitiesPage', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        res.sendFile(frontEndPath+'/index.html');
+    }
+    else{
+        res.sendFile(frontEndPath+'/addingGroups.html')
+    }
+})
+
+app.post('/createGroup', function(req,res){
+    var userCookie = req.cookies
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        res.sendFile(frontEndPath+'/index.html');
+    }
+    else{
+        var filter = {"email":userCookie.userEmail}
+        groupList = [];
+        
+        Team_upUsers.find(filter, function(err, Team_upUser){
+            groupList = Team_upUser[0].groups
+        })
+        
+        var newGroup = {
+            "name": req.body.groupName,
+            "type": req.body.type,
+            "description": req.body.description
+        }
+        
+        groupList.push(newGroup)
+        // TODO change to retreive,push and update
+        var update = {
+            Group: groupList
+        }
+        Team_upUsers.findOneAndUpdate(filter,update)
+        res.redirect('/home')
+    }
+})
+
+var getActivitiesFromDB = function(filter){
+    var res;
+    Team_upUsers.find(filter, function(err, Team_upUser){
+        // activityList.push(Team_upUser[0].activities)
+        console.log("here")
+        res = Team_upUser[0].activities
+        
+    })
+    return res
+}
+
+app.post('/createActivity', function(req,res){
+    var userCookie = req.cookies
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        // res.sendFile(frontEndPath+'/index.html');
+        res.redirect('/')
+    }
+    else{
+        var filter = {"email":userCookie.userEmail}
+        var activityList = []
+        
+        // Team_upUsers.find(filter, function(err, Team_upUser){
+            // // activityList.push(Team_upUser[0].activities)
+            // console.log("db activities", Team_upUser[0].activities)
+            // var activities = Team_upUser[0].activities
+            // for(var i=0; i<activities.length; i++){
+                // // activityList.push(Team_upUser[0].activites[i])
+                // activityList.push(activities[i])
+            // }
+            // console.log("activitylist in qq",activityList)
+        // })
+        var DB_activities = getActivitiesFromDB(filter)
+        console.log("DB_activities: ", DB_activities)
+        for (var i = 0; i<DB_activities.length; i++){
+            activityList.push(DB_activities[i])
+        }
+        
+        var newActivity = {
+            "name": req.body.activityName,
+            "type": req.body.type,
+            "description": req.body.description,
+            "location": req.body.location,
+            "time": req.body.time // TODO parse time
+        }
+        
+        activityList.push(newActivity)
+        console.log("activity list: ", activityList)
+        // TODO change to retreive,push and update
+        var update = {
+            activity: activityList
+        }
+        console.log(filter)
+        console.log(update)
+        Team_upUsers.findOneAndUpdate(filter,update)
+        res.redirect('/home')
+    }
+})
+
+
+app.get('/process-logout', function(req,res){
+    var userCookie = req.cookies
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        res.sendFile(frontEndPath+'/index.html');
+    }
+    res.clearCookie('userEmail')
+    res.sendFile(frontEndPath+'/index.html');
     
 })
 
 userConnectionString = credentials.mongo.db.connectionString
 mongoose.connect(userConnectionString)
+
+
+
 app.post('/process-login', function(req,res){
     
     // user_details = {

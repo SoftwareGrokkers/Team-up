@@ -12,7 +12,8 @@ var userBuilder = mongoose.Schema({
     city: String,
     state: String,
     zipcode: Number,
-    activity: Array,
+    activities: Array,
+    groups: Array,
     
 });
 

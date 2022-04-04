@@ -34,6 +34,7 @@ var createUser_test = function(Team_upUsers){
         state: "",
         zipcode: "",
         activity: [],
+        groups: []
     }).save()
     console.log("saved")
     count += 1
