@@ -178,7 +178,8 @@ app.post('/createGroup', function(req,res){
             var newgroup = {
             "Name": req.body.groupName,
             "type": req.body.type,
-            "description": req.body.description
+            "description": req.body.description,
+            "creator": userCookie.userEmail
             }
             
             for(var i=0; i<Team_upUser[0].groups.length; i++){
@@ -275,7 +276,8 @@ app.post('/createActivity', function(req,res){
             "type": req.body.type,
             "description": req.body.description,
             "location": req.body.location,
-            "time": req.body.time // TODO parse time
+            "time": req.body.time, // TODO parse time
+            "creator": userCookie.userEmail
             }
             for(var i=0; i<Team_upUser[0].activities.length; i++){
                 activityList.push(Team_upUser[0].activities[i])
