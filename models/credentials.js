@@ -6,7 +6,7 @@ module.exports = {
 	// },
 	mongo: {
 		db: {
-			connectionString: "mongodb+srv://softwaregrokkers:grokkerssoftware@cluster0.xa1km.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+			usersconnectionString: "mongodb+srv://softwaregrokkers:grokkerssoftware@cluster0.xa1km.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 		}
 	},
 };

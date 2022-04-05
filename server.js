@@ -20,6 +20,8 @@ var credentials = require("./models/credentials.js")
 var passwordEncrypter = require("./models/passwordEncrypter.js")
 // var handlebars = require("express-handlebars").create({defaultLayout: "main"})
 var Team_upUsers = require("./Team-upSchema.js")
+var Team_upActivities = require("./ActivitiesSchema.js")
+var Team_upGroups = require("./GroupsSchema.js")
 // app.engine("handlebars", handlebars.engine)
 // app.set("view engine", "handlebars")
 app.use(require("body-parser")());
@@ -167,38 +169,76 @@ app.post('/createGroup', function(req,res){
     }
     else{
         var filter = {"email":userCookie.userEmail}
-        groupList = [];
-        
         Team_upUsers.find(filter, function(err, Team_upUser){
-            groupList = Team_upUser[0].groups
-        })
-        
-        var newGroup = {
-            "name": req.body.groupName,
+            var groupList = []
+            
+            var newgroup = {
+            "Name": req.body.groupName,
             "type": req.body.type,
             "description": req.body.description
-        }
+            }
+            
+            for(var i=0; i<Team_upUser[0].groups.length; i++){
+                groupList.push(Team_upUser[0].groups[i])
+            }
+            
+            groupList.push(newgroup)
+            // console.log(Team_upUser[0].activities)
+            // console.log("activity list inside q: ", aactivityList)
+            
+            var update = {
+                groups: groupList
+            }
+            
+            Team_upUsers.findOneAndUpdate(filter,update,function(err,doc){
+                console.log("successfully updated")
+            })
+        })
         
-        groupList.push(newGroup)
-        // TODO change to retreive,push and update
-        var update = {
-            Group: groupList
-        }
-        Team_upUsers.findOneAndUpdate(filter,update)
+        var groupfilter = {"Name": req.body.groupName}
+        
+        Team_upGroups.find(groupfilter, function(err, Team_upGroup){
+            if (Team_upGroup.length){
+                console.log("Group already exists")
+                res.redirect("/home")
+            }
+            
+            new Team_upGroups({
+            "Name": req.body.groupName,
+            "type": req.body.type,
+            "description": req.body.description
+            }).save(function(err, a){
+                if(err) return res.send(500, "Error occured: database error")
+                // res.json({id:a._id})
+            })
+            console.log("successfully made group")
+            
+        })
+        
+        
         res.redirect('/home')
     }
 })
 
-var getActivitiesFromDB = function(filter){
-    var res;
-    Team_upUsers.find(filter, function(err, Team_upUser){
+async function getUserDetails (filter, callback){
+    await Team_upUsers.find(filter, function(err, Team_upUser){
         // activityList.push(Team_upUser[0].activities)
-        console.log("here")
-        res = Team_upUser[0].activities
-        
+        if (err){
+            callback(err, null)
+        }
+        else{
+        // console.log("here")
+        // res = Team_upUser[0].activities
+        // console.log(Team_upUser[0])
+        callback(null, Team_upUser[0])
+        }
     })
-    return res
+    
 }
+
+// const getUserDetails = (filter) => {
+    // return Team_upUsers.find(filter).exec();
+// }
 
 app.post('/createActivity', function(req,res){
     var userCookie = req.cookies
@@ -210,7 +250,7 @@ app.post('/createActivity', function(req,res){
     }
     else{
         var filter = {"email":userCookie.userEmail}
-        var activityList = []
+        // var activityList = []
         
         // Team_upUsers.find(filter, function(err, Team_upUser){
             // // activityList.push(Team_upUser[0].activities)
@@ -222,29 +262,55 @@ app.post('/createActivity', function(req,res){
             // }
             // console.log("activitylist in qq",activityList)
         // })
-        var DB_activities = getActivitiesFromDB(filter)
-        console.log("DB_activities: ", DB_activities)
-        for (var i = 0; i<DB_activities.length; i++){
-            activityList.push(DB_activities[i])
-        }
         
-        var newActivity = {
-            "name": req.body.activityName,
+        Team_upUsers.find(filter, function(err, Team_upUser){
+            var activityList = []
+            
+            var newActivity = {
+            "Name": req.body.activityName,
             "type": req.body.type,
             "description": req.body.description,
             "location": req.body.location,
             "time": req.body.time // TODO parse time
-        }
+            }
+            for(var i=0; i<Team_upUser[0].activities.length; i++){
+                activityList.push(Team_upUser[0].activities[i])
+            }
+            
+            activityList.push(newActivity)
+            // console.log(Team_upUser[0].activities)
+            // console.log("activity list inside q: ", aactivityList)
+            
+            var update = {
+                activities: activityList
+            }
+            
+            Team_upUsers.findOneAndUpdate(filter,update,function(err,doc){
+                console.log("successfully updated")
+            })
+        })
         
-        activityList.push(newActivity)
-        console.log("activity list: ", activityList)
-        // TODO change to retreive,push and update
-        var update = {
-            activity: activityList
-        }
-        console.log(filter)
-        console.log(update)
-        Team_upUsers.findOneAndUpdate(filter,update)
+        activityfilter = {"Name": req.body.activityName}
+        
+        Team_upActivities.find(activityfilter, function(err, Team_upActivity){
+            if (Team_upActivity.length){
+                console.log("Activity already exists")
+                res.redirect("/home")
+            }
+            
+            new Team_upActivities({
+                "Name": req.body.activityName,
+                "type": req.body.type,
+                "description": req.body.description,
+                "location": req.body.location,
+                "time": req.body.time // TODO parse time
+            }).save(function(err, a){
+                if(err) return res.send(500, "Error occured: database error")
+                // res.json({id:a._id})
+            })
+            console.log("Successfully made activity")
+        })
+        
         res.redirect('/home')
     }
 })
@@ -262,7 +328,7 @@ app.get('/process-logout', function(req,res){
     
 })
 
-userConnectionString = credentials.mongo.db.connectionString
+userConnectionString = credentials.mongo.db.usersconnectionString
 mongoose.connect(userConnectionString)
 
 

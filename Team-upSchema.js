@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var userBuilder = mongoose.Schema({
+const userBuilder = new mongoose.Schema({
 	
     firstname: String,
     lastname: String,
@@ -17,5 +17,32 @@ var userBuilder = mongoose.Schema({
     
 });
 
-var users = mongoose.model("Users", userBuilder);
-module.exports = users;
+
+// const activityBuilder = new mongoose.Schema({
+	
+    
+    // Name: String,
+    // type: String,
+    // description: String,
+    // location: String,
+    // time: String,
+    
+// });
+
+
+// const groupBuilder = new mongoose.Schema({
+	
+    
+    
+    
+    // Name: String,
+    // type: String,
+    // description: String,
+    
+    
+// });
+
+const users = mongoose.model("users", userBuilder);
+// const activities = mongoose.model("Activities", activityBuilder);
+// const groups = mongoose.model("Groups", groupBuilder);
+module.exports = users
