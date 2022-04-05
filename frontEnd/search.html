@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Up</title>
+    <script
+      src="https://kit.fontawesome.com/a9e1b499ba.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="searchScript.js"></script>
+    <link rel="stylesheet" href="searchStyles.css" />
+  </head>
+  <body>
+    <div class="topBanner">
+      <h1>Team Up</h1>
+    </div>
+    <div class="nav">
+      <span id="navBtn"
+        ><a href="#"><i class="fa-solid fa-bars"></i></a
+      ></span>
+      <a href="#"><i class="fa-solid fa-house"></i></a>
+      <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="#"><i class="fa-solid fa-user-group"></i></a>
+      <a href="#"><i class="fa-solid fa-gear"></i></a>
+      <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+    </div>
+
+    <div class="navFull" id="navFull">
+      <span id="navClose"
+        ><i class="fa-solid fa-bars"></i>
+        <p>Menu</p></span
+      >
+
+      <span
+        ><a href="#"><i class="fa-solid fa-house"></i></a>
+        <p>Home</p></span
+      >
+      <span
+        ><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <p>Search</p></span
+      >
+      <span
+        ><a href="#"><i class="fa-solid fa-user-group"></i></a>
+        <p>Groups</p></span
+      >
+      <span id="settings"
+        ><a href="#"><i class="fa-solid fa-gear"></i></a>
+        <p>Settings</p></span
+      >
+      <span id="logout"
+        ><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        <p>Logout</p></span
+      >
+    </div>
+
+    <div class="search">
+      <input
+        type="text"
+        name=""
+        id="searchBar"
+        placeholder="Type a group name"
+      />
+
+      <div id="searchResults"></div>
+    </div>
+
+    <!-- Expand nav bar -->
+    <script>
+      const navBtn = document.getElementById("navBtn");
+      const navFull = document.getElementById("navFull");
+      const navClose = document.getElementById("navClose");
+
+      navBtn.addEventListener("click", () => {
+        navFull.classList.add("showNav");
+      });
+
+      navClose.addEventListener("click", () => {
+        navFull.classList.remove("showNav");
+      });
+
+      // Search Test
+      var searchInput = document.getElementById("searchBar");
+
+      var groupsData = [
+        { Name: "CSC 3380", description: "Hello" },
+        { Name: "Soccer", description: "hello soccer" },
+        { Name: "CSC 4103", description: "hello soccer" },
+        { Name: "Csc 2262", description: "hello soccer" },
+        { Name: "football", description: "hello soccer" },
+        { Name: "tennis", description: "hello soccer" },
+      ];
+
+      if (groupsData.length == 0) {
+        console.log("Add a group");
+      } else {
+        for (let i = 0; i < groupsData.length; i++) {
+          var searchResultsDiv = document.getElementById("searchResults");
+          var resultDiv = document.createElement("div");
+          resultDiv.classList.add("result");
+          resultDiv.id = groupsData[i].Name;
+
+          var groupName = document.createElement("h1");
+          groupName.appendChild(document.createTextNode(groupsData[i].Name));
+
+          resultDiv.appendChild(groupName);
+          searchResultsDiv.appendChild(resultDiv);
+        }
+      }
+
+      searchInput.addEventListener("input", searchAlgorithm);
+
+      function searchAlgorithm(e) {
+        const text = e.target.value.toLowerCase();
+        for (let i = 0; i < groupsData.length; i++) {
+          const visible = groupsData[i].Name.toLowerCase().includes(text);
+          console.log(groupsData[i].Name + " " + visible);
+
+          var hideDiv = document.getElementById(groupsData[i].Name);
+
+          if (!visible) {
+            var hideDiv = document.getElementById(groupsData[i].Name);
+            hideDiv.style.display = "none";
+          } else {
+            hideDiv.style.display = "block";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
