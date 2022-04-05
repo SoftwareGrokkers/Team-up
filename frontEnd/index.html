@@ -11,24 +11,24 @@
   <body>
     <div class="box" id="box">
       <div id="signUp" class="forms">
-        <form action="">
+        <form action="/process-signup" method="POST">
           <br />
           <img src="TeamUpLogo2.png" alt="" width="100" height="100" />
           <h2 class="accountText">Create Account</h2>
-          <input id="" type="text" placeholder="First Name" />
-          <input type="text" placeholder="Last Name" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <input id="" type="text" placeholder="First Name" name="firstname" required/>
+          <input type="text" placeholder="Last Name" name="lastname" required/>
+          <input type="email" placeholder="Email" name="email" required/>
+          <input type="password" placeholder="Password" name="password" required/>
           <button>Sign Up</button>
         </form>
       </div>
       <div id="logIn" class="forms">
-        <form action="">
+        <form action="/process-login" method="POST">
           <br />
           <img src="TeamUpLogo2.png" alt="" width="100" height="100" />
           <h2 class="accountText">Log In</h2>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <input type="email" placeholder="Email" name="email" required/>
+          <input type="password" placeholder="Password" name="password" required/>
           <button>Log In</button>
         </form>
       </div>
