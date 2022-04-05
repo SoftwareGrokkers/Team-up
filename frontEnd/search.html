@@ -9,7 +9,7 @@
       src="https://kit.fontawesome.com/a9e1b499ba.js"
       crossorigin="anonymous"
     ></script>
-    <script src="searchScript.js"></script>
+
     <link rel="stylesheet" href="searchStyles.css" />
   </head>
   <body>
@@ -20,11 +20,17 @@
       <span id="navBtn"
         ><a href="#"><i class="fa-solid fa-bars"></i></a
       ></span>
-      <a href="#"><i class="fa-solid fa-house"></i></a>
-      <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <a href="#"><i class="fa-solid fa-user-group"></i></a>
+      <a href="/home"><i class="fa-solid fa-house"></i></a>
+      <a href="/searchGroupsAndActivitiesPage"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></a>
+      <a href="createGroupsAndActivitiesPage"
+        ><i class="fa-solid fa-user-group"></i
+      ></a>
       <a href="#"><i class="fa-solid fa-gear"></i></a>
-      <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      <a href="/process-logout"
+        ><i class="fa-solid fa-arrow-right-from-bracket"></i
+      ></a>
     </div>
 
     <div class="navFull" id="navFull">
@@ -56,16 +62,41 @@
     </div>
 
     <div class="search">
-      <input
-        type="text"
-        name=""
-        id="searchBar"
-        placeholder="Type a group name"
-      />
+      <div class="searchOptions">
+        <input
+          type="text"
+          name=""
+          id="searchBar"
+          placeholder="Type a group name"
+        />
+
+        <div class="dropdown">
+          <div class="title pointerCursor">
+            Select an option <i class="fa fa-angle-right"></i>
+          </div>
+
+          <div class="menu pointerCursor hide">
+            <div class="option" id="option1">Groups</div>
+            <div class="option" id="option2">Activities</div>
+          </div>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="dropdown" id="dropdown2">
+          <div class="title2 pointerCursor">
+            Sort <i class="fa fa-angle-right"></i>
+          </div>
+
+          <div class="menu2 pointerCursor hide">
+            <div class="option2Sort" id="option1Sort">Sort by time</div>
+            <div class="option2Sort" id="option2Sort">Sort by name</div>
+          </div>
+        </div>
+      </div>
 
       <div id="searchResults"></div>
     </div>
-
+    <script src="searchScript.js"></script>
     <!-- Expand nav bar -->
     <script>
       const navBtn = document.getElementById("navBtn");
@@ -81,52 +112,52 @@
       });
 
       // Search Test
-      var searchInput = document.getElementById("searchBar");
+      // var searchInput = document.getElementById("searchBar");
 
-      var groupsData = [
-        { Name: "CSC 3380", description: "Hello" },
-        { Name: "Soccer", description: "hello soccer" },
-        { Name: "CSC 4103", description: "hello soccer" },
-        { Name: "Csc 2262", description: "hello soccer" },
-        { Name: "football", description: "hello soccer" },
-        { Name: "tennis", description: "hello soccer" },
-      ];
+      // var groupsData = [
+      //   { Name: "CSC 3380", description: "Hello" },
+      //   { Name: "Soccer", description: "hello soccer" },
+      //   { Name: "CSC 4103", description: "hello soccer" },
+      //   { Name: "Csc 2262", description: "hello soccer" },
+      //   { Name: "football", description: "hello soccer" },
+      //   { Name: "tennis", description: "hello soccer" },
+      // ];
 
-      if (groupsData.length == 0) {
-        console.log("Add a group");
-      } else {
-        for (let i = 0; i < groupsData.length; i++) {
-          var searchResultsDiv = document.getElementById("searchResults");
-          var resultDiv = document.createElement("div");
-          resultDiv.classList.add("result");
-          resultDiv.id = groupsData[i].Name;
+      // if (groupsData.length == 0) {
+      //   console.log("Add a group");
+      // } else {
+      //   for (let i = 0; i < groupsData.length; i++) {
+      //     var searchResultsDiv = document.getElementById("searchResults");
+      //     var resultDiv = document.createElement("div");
+      //     resultDiv.classList.add("result");
+      //     resultDiv.id = groupsData[i].Name;
 
-          var groupName = document.createElement("h1");
-          groupName.appendChild(document.createTextNode(groupsData[i].Name));
+      //     var groupName = document.createElement("h1");
+      //     groupName.appendChild(document.createTextNode(groupsData[i].Name));
 
-          resultDiv.appendChild(groupName);
-          searchResultsDiv.appendChild(resultDiv);
-        }
-      }
+      //     resultDiv.appendChild(groupName);
+      //     searchResultsDiv.appendChild(resultDiv);
+      //   }
+      // }
 
-      searchInput.addEventListener("input", searchAlgorithm);
+      // searchInput.addEventListener("input", searchAlgorithm);
 
-      function searchAlgorithm(e) {
-        const text = e.target.value.toLowerCase();
-        for (let i = 0; i < groupsData.length; i++) {
-          const visible = groupsData[i].Name.toLowerCase().includes(text);
-          console.log(groupsData[i].Name + " " + visible);
+      // function searchAlgorithm(e) {
+      //   const text = e.target.value.toLowerCase();
+      //   for (let i = 0; i < groupsData.length; i++) {
+      //     const visible = groupsData[i].Name.toLowerCase().includes(text);
+      //     console.log(groupsData[i].Name + " " + visible);
 
-          var hideDiv = document.getElementById(groupsData[i].Name);
+      //     var hideDiv = document.getElementById(groupsData[i].Name);
 
-          if (!visible) {
-            var hideDiv = document.getElementById(groupsData[i].Name);
-            hideDiv.style.display = "none";
-          } else {
-            hideDiv.style.display = "block";
-          }
-        }
-      }
+      //     if (!visible) {
+      //       var hideDiv = document.getElementById(groupsData[i].Name);
+      //       hideDiv.style.display = "none";
+      //     } else {
+      //       hideDiv.style.display = "block";
+      //     }
+      //   }
+      // }
     </script>
   </body>
 </html>

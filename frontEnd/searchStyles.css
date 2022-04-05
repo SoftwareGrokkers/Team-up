@@ -88,23 +88,35 @@ body {
   flex-direction: column;
 }
 
+.searchOptions {
+  display: flex;
+  width: 100vw;
+  position: absolute;
+  flex-direction: row;
+  justify-content: center;
+  top: 10%;
+}
+
 #searchBar {
   border-radius: 15px;
   font-size: 2em;
+  height: 25%;
   width: 30%;
   position: relative;
-  left: 35%;
-  top: 10%;
+  /* left: 35%;
+  top: 10%; */
   border-color: black;
   text-align: center;
+  margin-top: 0.3em;
 }
 
 #searchResults {
   position: relative;
-  top: 13%;
+  top: 15%;
   left: 3%;
   /* height: 80vh; */
   width: 96vw;
+  margin-top: 3em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -116,6 +128,57 @@ body {
   height: 10vh;
   border-radius: 10px;
   margin: 30px;
+}
+
+.hide {
+  max-height: 0 !important;
+}
+
+.dropdown {
+  border: 0.1em solid black;
+  width: 10em;
+  margin-bottom: 1em;
+  margin: 1em;
+  margin-left: 2em;
+}
+
+.dropdown .title,
+.dropdown .title2 {
+  margin: 0.3em 0.3em 0.3em 0.3em;
+  width: 100%;
+}
+
+.dropdown .title .fa-angle-right {
+  float: right;
+  margin-right: 0.7em;
+  transition: transform 0.3s;
+}
+
+.dropdown .menu,
+.dropdown .menu2 {
+  transition: max-height 0.5s ease-out;
+  max-height: 20em;
+  overflow: hidden;
+}
+
+.dropdown .menu .option,
+.dropdown .menu2 .option2 {
+  margin: 0.3em 0.3em 0.3em 0.3em;
+  margin-top: 0.3em;
+}
+
+.dropdown .menu .option:hover,
+.dropdown .menu2 .option2:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.menu:hover,
+.menu2:hover {
+  cursor: pointer;
+}
+
+.rotate-90 {
+  transform: rotate(90deg);
 }
 
 /* #groups, 
