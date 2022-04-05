@@ -131,6 +131,9 @@ app.get('/searchGroupsAndActivitiesPage', function(req,res){
         console.log("not logged in")
         res.sendFile(frontEndPath+'/index.html');
     }
+    else{
+        res.sendFile(frontEndPath+'/search.html')
+    }
     
 })
 
