@@ -209,7 +209,8 @@ app.post('/createGroup', function(req,res){
             new Team_upGroups({
             "Name": req.body.groupName,
             "type": req.body.type,
-            "description": req.body.description
+            "description": req.body.description,
+            "creator": userCookie.userEmail
             }).save(function(err, a){
                 if(err) return res.send(500, "Error occured: database error")
                 // res.json({id:a._id})
@@ -306,7 +307,8 @@ app.post('/createActivity', function(req,res){
                 "type": req.body.type,
                 "description": req.body.description,
                 "location": req.body.location,
-                "time": req.body.time // TODO parse time
+                "time": req.body.time, // TODO parse time
+                "creator": userCookie.userEmail
             }).save(function(err, a){
                 if(err) return res.send(500, "Error occured: database error")
                 // res.json({id:a._id})

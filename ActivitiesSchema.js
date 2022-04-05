@@ -8,6 +8,7 @@ var activityBuilder = mongoose.Schema({
     description: String,
     location: String,
     time: String,
+    creator: String
     
 });
 
