@@ -1,59 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Up</title>
-    <script src="https://kit.fontawesome.com/a9e1b499ba.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="addingGroupsStyles.css"/>
+    <script
+      src="https://kit.fontawesome.com/a9e1b499ba.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="addingGroupsStyles.css" />
   </head>
   <body>
     <div class="topBanner">
       <h1>Team Up</h1>
     </div>
     <div class="nav">
-      <span id="navBtn"><a href="#"><i class="fa-solid fa-bars"></i></a></span>
-      <a href="#"><i class="fa-solid fa-house"></i></a>
-      <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-      <a href="#"><i class="fa-solid fa-user-group"></i></a>
+      <span id="navBtn"
+        ><a href="#"><i class="fa-solid fa-bars"></i></a
+      ></span>
+      <a href="/home"><i class="fa-solid fa-house"></i></a>
+      <a href="/searchGroupsAndActivitiesPage"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></a>
+      <a href="createGroupsAndActivitiesPage"
+        ><i class="fa-solid fa-user-group"></i
+      ></a>
       <a href="#"><i class="fa-solid fa-gear"></i></a>
-      <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      <a href="/process-logout"
+        ><i class="fa-solid fa-arrow-right-from-bracket"></i
+      ></a>
     </div>
 
     <div class="navFull" id="navFull">
-      <span id="navClose"><i class="fa-solid fa-bars"></i>
-        <p>Menu</p></span>
-      <span><a href="/home"><i class="fa-solid fa-house"></i></a>
-        <p>Home</p></span>
-      <span><a href="/searchGroupsAndActivitiesPage"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <p>Search</p></span>
-      <span><a href="createGroupsAndActivitiesPage"><i class="fa-solid fa-user-group"></i></a>
-        <p>Groups</p></span>
-      <span id="settings"><a href="#"><i class="fa-solid fa-gear"></i></a>
-        <p>Settings</p></span>
-      <span id="logout"><a href="/process-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        <p>Logout</p></span>
+      <span id="navClose"
+        ><i class="fa-solid fa-bars"></i>
+        <p>Menu</p></span
+      >
+      <span
+        ><a href="/home"><i class="fa-solid fa-house"></i></a>
+        <p>Home</p></span
+      >
+      <span
+        ><a href="/searchGroupsAndActivitiesPage"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></a>
+        <p>Search</p></span
+      >
+      <span
+        ><a href="createGroupsAndActivitiesPage"
+          ><i class="fa-solid fa-user-group"></i
+        ></a>
+        <p>Groups</p></span
+      >
+      <span id="settings"
+        ><a href="#"><i class="fa-solid fa-gear"></i></a>
+        <p>Settings</p></span
+      >
+      <span id="logout"
+        ><a href="/process-logout"
+          ><i class="fa-solid fa-arrow-right-from-bracket"></i
+        ></a>
+        <p>Logout</p></span
+      >
     </div>
 
     <div class="addBox">
       <div class="buttonBG">
         <div id="buttons"></div>
-        <button type="buton" class="createButtons" onclick="pullCreateActivity()">Create Group</button>
-        <button type="buton" class="createButtons" onclick="pullCreateGroup()">Create Activity</button>
+        <button
+          type="buton"
+          class="createButtons"
+          onclick="pullCreateActivity()"
+        >
+          Create Group
+        </button>
+        <button type="buton" class="createButtons" onclick="pullCreateGroup()">
+          Create Activity
+        </button>
       </div>
-      <form class="groupsForm" id="createGroup" action="/createGroup" method="POST">
-        <input type="text" class="groupInput" placeholder="Group Name" name="groupName" required>
-        <input type="text" class="groupInput" placeholder="Type" name="type" required>
-        <input type="text" class="groupInput" placeholder="Description" name="description" required>
+      <form
+        class="groupsForm"
+        id="createGroup"
+        action="/createGroup"
+        method="POST"
+      >
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Group Name"
+          name="groupName"
+          required
+        />
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Type"
+          name="type"
+          required
+        />
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Description"
+          name="description"
+          required
+        />
         <button type="submit" class="submitCreate">Create</button>
       </form>
-      <form class="activitiesForm" id="createActivity" action="/createActivity" method="POST">
-        <input type="text" class="groupInput" placeholder="Activity Name" name="activityName" required>
-        <input type="text" class="groupInput" placeholder="Type" name="type" required>
-        <input type="text" class="groupInput" placeholder="Description" name="description" required>
-        <input type="text" class="groupInput" placeholder="Location" name="location" required>
-        <input type="text" class="groupInput" placeholder="Time" name="time" required>
+      <form
+        class="activitiesForm"
+        id="createActivity"
+        action="/createActivity"
+        method="POST"
+      >
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Activity Name"
+          name="activityName"
+          required
+        />
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Type"
+          name="type"
+          required
+        />
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Description"
+          name="description"
+          required
+        />
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Location"
+          name="location"
+          required
+        />
+        <input
+          type="text"
+          class="groupInput"
+          placeholder="Time"
+          name="time"
+          required
+        />
         <button type="submit" class="submitCreate">Create</button>
       </form>
     </div>
