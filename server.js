@@ -46,6 +46,12 @@ class Database_Manager{
 	// }
 }
 
+// class activityCreator{
+    // createActivity(){
+        
+    // }
+// }
+
 
 app.set('port', process.env.port || 3000)
 var mongoose = require('mongoose')
@@ -110,6 +116,39 @@ app.get('/userActivities', function(req,res){
     
 })
 
+
+app.get('/allActivities', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    // console.log("User cookie: ",userCookie.userEmail)
+    // if (userCookie.length > 0){
+        // console.log("here")
+        // Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
+            // console.log(Team_upUser)
+            // if ((Team_upUser == null) || (Team_upUser.length == 0)){
+            // console.log("user doesn't exist")
+            // res.redirect('/incorrectLogin')
+            // }
+            // else{
+                // // console.log("here")
+                // res.json(Team_upUser.activites)
+            // }
+        // })
+    // }
+    Team_upActivities.find({}, function(err,Team_upActivity){
+        // console.log(Team_upUser[0]['activities'])
+        // console.log("activity: ",Team_upUser[0].activities)
+        res.json(Team_upActivity)
+    })
+    
+})
+
+
 app.get('/userGroups', function(req,res){
     var userCookie = req.cookies
     
@@ -141,6 +180,39 @@ app.get('/userGroups', function(req,res){
     })
     
 })
+
+
+app.get('/allGroups', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    // console.log("User cookie: ",userCookie.userEmail)
+    // if (userCookie.length > 0){
+        // console.log("here")
+        // Team_upUsers.find({email:userCookie.userEmail}, function(err,Team_upUser){
+            // console.log(Team_upUser)
+            // if ((Team_upUser == null) || (Team_upUser.length == 0)){
+            // console.log("user doesn't exist")
+            // res.redirect('/incorrectLogin')
+            // }
+            // else{
+                // // console.log("here")
+                // res.json(Team_upUser.activites)
+            // }
+        // })
+    // }
+    Team_upGroups.find({}, function(err,Team_upGroup){
+        // console.log(Team_upUser[0]['activities'])
+        // console.log("activity: ",Team_upUser[0].activities)
+        res.json(Team_upGroup)
+    })
+    
+})
+
 
 app.get('/searchGroupsAndActivitiesPage', function(req,res){
     var userCookie = req.cookies
