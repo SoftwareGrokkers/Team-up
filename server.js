@@ -27,11 +27,31 @@ var Team_upGroups = require("./GroupsSchema.js")
 app.use(require("body-parser")());
 
 const path = require('path')
+class Database_Manager{
+	create_db_connection(mongoose,credentials) {
+		var userConnectionString = credentials.mongo.db.usersconnectionString
+        mongoose.connect(userConnectionString)
+	}
+    
+	// var close_db_connection = function(){
+		// // close database connection
+	// }
+	
+	// var retrive_data = function(){
+		// // retrives data
+	// }
+	
+	// var send_data = function(){
+		// // sends data
+	// }
+}
 
 
 app.set('port', process.env.port || 3000)
 var mongoose = require('mongoose')
-// Kathan wuz here :)
+// Kathan wuz here :) lol
+const databaseManager = new Database_Manager();
+databaseManager.create_db_connection(mongoose,credentials)
 app.get('/', function(req, res){
     // res.type('text/html')
     // res.write("<h1>Welcome to the home page</h1>")
@@ -335,8 +355,7 @@ app.get('/process-logout', function(req,res){
     
 })
 
-userConnectionString = credentials.mongo.db.usersconnectionString
-mongoose.connect(userConnectionString)
+
 
 
 
@@ -525,22 +544,7 @@ app.listen(app.get("port"), function(){
 
 
 
-// class Database_Manager{
-	// var create_db_connection = function(){
-		// // connect to database
-	// }
-	// var close_db_connection = function(){
-		// // close database connection
-	// }
-	
-	// var retrive_data = function(){
-		// // retrives data
-	// }
-	
-	// var send_data = function(){
-		// // sends data
-	// }
-// }
+
 
 // class Homepage{
 	// var show-groups = function(){
