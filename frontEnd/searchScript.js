@@ -61,6 +61,8 @@ function handleTitleChange(e){
       else {
         for (let i = 0; i < groupsData.length; i++) {
           var resultDiv = document.createElement("div");
+          var link = document.createElement("a")
+
           resultDiv.classList.add("result");
           resultDiv.id = groupsData[i].Name;
     
@@ -68,7 +70,8 @@ function handleTitleChange(e){
           groupName.appendChild(document.createTextNode(groupsData[i].Name));
     
           resultDiv.appendChild(groupName);
-          searchResultsDiv.appendChild(resultDiv);
+          link.appendChild(resultDiv)
+          searchResultsDiv.appendChild(link);
         }
       }
     };
@@ -91,6 +94,8 @@ function handleTitleChange(e){
       else {
         for (let i = 0; i < activitiesData.length; i++) {
           var resultDiv = document.createElement("div");
+          var link = document.createElement("a")
+
           resultDiv.classList.add("result");
           resultDiv.id = activitiesData[i].Name;
     
@@ -98,7 +103,8 @@ function handleTitleChange(e){
           activityName.appendChild(document.createTextNode(activitiesData[i].Name));
     
           resultDiv.appendChild(activityName);
-          searchResultsDiv.appendChild(resultDiv);
+          link.appendChild(resultDiv)
+          searchResultsDiv.appendChild(link);
         }
       }
     };
@@ -136,17 +142,30 @@ document.querySelector('.dropdown .title').addEventListener('change', handleTitl
 var searchResultsDiv = document.getElementById('searchResults');
 var searchInput = document.getElementById("searchBar")
 
+var getUserCookie = function(){
+    rawCookie = document.cookie
+    goodCookie = rawCookie.replace("%40","@")
+    return goodCookie
+}
+
+var userCookie = getUserCookie()
+var request = new XMLHttpRequest();;
+const GroupsUrl = `http://localhost:3000/allGroups?cookie=${userCookie}`
+const ActivitiesUrl = `http://localhost:3000/allActivities?cookie=${userCookie}`
+request.open('GET',GroupsUrl,false)
+request.send()
+var groupsData = JSON.parse(request.responseText);
 
 
-var groupsData = [
-  { Name: "CSC 3380", description: "Hello" },
-  { Name: "Soccer", description: "hello soccer" },
-  { Name: "CSC 4103", description: "hello soccer" },
-  { Name: "Csc 2262", description: "hello soccer" },
-  { Name: "football", description: "hello soccer" },
-  { Name: "tennis", description: "hello soccer" },
-  { Name: "tesfddfannis", description: "hello soccer" },
-];
+// var groupsData = [
+  // { Name: "CSC 3380", description: "Hello" },
+  // { Name: "Soccer", description: "hello soccer" },
+  // { Name: "CSC 4103", description: "hello soccer" },
+  // { Name: "Csc 2262", description: "hello soccer" },
+  // { Name: "football", description: "hello soccer" },
+  // { Name: "tennis", description: "hello soccer" },
+  // { Name: "tesfddfannis", description: "hello soccer" },
+// ];
 // var groupsData = JSON.parse(groupsSearch.responseText);
 
 function searchAlgorithm(e) {
@@ -171,16 +190,20 @@ function searchAlgorithm(e) {
 
 
 
+var request = new XMLHttpRequest();
+request.open('GET',ActivitiesUrl,false)
+request.send()
+var activitiesData = JSON.parse(request.responseText)
 /////////////////////////////////////////////////////////////
 
-var activitiesData = [
-  { Name: "CSC", description: "Hello" },
-  { Name: "Soccer", description: "hello soccer" },
-  { Name: "CSC 4103", description: "hello soccer" },
-  { Name: "Csc 2262", description: "hello soccer" },
-  { Name: "football", description: "hello soccer" },
-  { Name: "tennis", description: "hello soccer" },
-];
+// var activitiesData = [
+  // { Name: "CSC", description: "Hello" },
+  // { Name: "Soccer", description: "hello soccer" },
+  // { Name: "CSC 4103", description: "hello soccer" },
+  // { Name: "Csc 2262", description: "hello soccer" },
+  // { Name: "football", description: "hello soccer" },
+  // { Name: "tennis", description: "hello soccer" },
+// ];
 // var activitiesData = JSON.parse(groupsSearch.responseText);
 
 // Search Activities

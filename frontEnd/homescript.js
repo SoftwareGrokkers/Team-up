@@ -39,22 +39,28 @@ var activitiesData = JSON.parse(request.responseText)
 for (let i = 0; i < groupsData.length; i++) {
   var allGroupsDiv = document.getElementById('groups');
   var groupdiv = document.createElement('div');
+  var link = document.createElement('a');
   groupdiv.classList.add('group');
 
   var groupName = document.createElement("h1");
   groupName.appendChild(document.createTextNode(groupsData[i].Name));
 
   groupdiv.appendChild(groupName);
-  allGroupsDiv.appendChild(groupdiv);
+  link.appendChild(groupdiv)
+  allGroupsDiv.appendChild(link);
 }
+
 for (let i = 0; i < activitiesData.length; i++) {
   var allGroupsDiv = document.getElementById('activities');
   var groupdiv = document.createElement('div');
+  var link = document.createElement('a')
   groupdiv.classList.add('activity');
 
   var groupName = document.createElement("h1");
   groupName.appendChild(document.createTextNode(activitiesData[i].Name));
 
+
   groupdiv.appendChild(groupName);
-  allGroupsDiv.appendChild(groupdiv);
+  link.appendChild(groupdiv)
+  allGroupsDiv.appendChild(link);
 }
