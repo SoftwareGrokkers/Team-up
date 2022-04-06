@@ -61,6 +61,10 @@ function handleTitleChange(e){
       else {
         for (let i = 0; i < groupsData.length; i++) {
           var resultDiv = document.createElement("div");
+          var link = document.createElement("a")
+          
+          link.href = "/openGroupPage"
+          
           resultDiv.classList.add("result");
           resultDiv.id = groupsData[i].Name;
     
@@ -68,7 +72,8 @@ function handleTitleChange(e){
           groupName.appendChild(document.createTextNode(groupsData[i].Name));
     
           resultDiv.appendChild(groupName);
-          searchResultsDiv.appendChild(resultDiv);
+          link.appendChild(resultDiv)
+          searchResultsDiv.appendChild(link);
         }
       }
     };
@@ -91,6 +96,10 @@ function handleTitleChange(e){
       else {
         for (let i = 0; i < activitiesData.length; i++) {
           var resultDiv = document.createElement("div");
+          var link = document.createElement("a")
+
+          link.href = "/openActivityPage"
+          
           resultDiv.classList.add("result");
           resultDiv.id = activitiesData[i].Name;
     
@@ -98,7 +107,8 @@ function handleTitleChange(e){
           activityName.appendChild(document.createTextNode(activitiesData[i].Name));
     
           resultDiv.appendChild(activityName);
-          searchResultsDiv.appendChild(resultDiv);
+          link.appendChild(resultDiv)
+          searchResultsDiv.appendChild(link);
         }
       }
     };

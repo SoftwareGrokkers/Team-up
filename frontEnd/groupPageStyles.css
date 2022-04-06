@@ -85,3 +85,59 @@ body {
   font-size: 1.5em;
   margin-left: 0.5em;
 }
+
+#groupInfo {
+  position: absolute;
+  top: 10%;
+  left: 5.5%;
+}
+
+#groupInfo * {
+  margin: 0;
+}
+
+.message {
+  border: black 2px solid;
+  height:45vh;
+  width: 93vw;
+  position: absolute;
+  bottom: 25%;
+  right: 1.5%;
+}
+
+.yourMessage {
+  border: lightblue 10px solid;
+  width: 88vw;
+  height: 7vh;
+  position: relative;
+  left: 1.2%;
+  top: 1%;
+  color: gray;
+  font-size: 1em;
+  padding: 10px;
+  padding-top: 0;
+  margin-top: .5em;
+}
+
+.fakeMessageBox {
+  margin: 1em;
+  height: 8vh;
+  width: 88vw;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: rgb(240, 240, 240);
+}
+
+.messageName {
+  font-weight: bold;
+}
+
+.button {
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  font-size: 1.5em;
+  border-radius: 10px;
+  border: black 2px solid;
+  background-color: lightgreen;
+}

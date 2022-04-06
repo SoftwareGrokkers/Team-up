@@ -4,34 +4,49 @@
 // encript password
 // handle errors
 
-var express = require('express')
 
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-const flash = require('connect-flash')
-var app = express()
-app.use(cookieParser('secret')); //TODO move to models
-app.use(session({cookie: { maxAge: 60000 }}));
-app.use(flash());
-app.use(express.static(__dirname+'/frontEnd')) //TODO figure this out
 frontEndPath = __dirname+'/frontEnd'
-// var fs = require("fs")
-var credentials = require("./models/credentials.js")
-var passwordEncrypter = require("./models/passwordEncrypter.js")
+const mongoose = require('mongoose')
+const credentials = require("./models/credentials.js")
+const passwordEncrypter = require("./models/passwordEncrypter.js")
 // var handlebars = require("express-handlebars").create({defaultLayout: "main"})
-var Team_upUsers = require("./Team-upSchema.js")
-var Team_upActivities = require("./ActivitiesSchema.js")
-var Team_upGroups = require("./GroupsSchema.js")
 // app.engine("handlebars", handlebars.engine)
 // app.set("view engine", "handlebars")
-app.use(require("body-parser")());
+
 
 const path = require('path')
-class Database_Manager{
+class Creator_class{
 	create_db_connection(mongoose,credentials) {
-		var userConnectionString = credentials.mongo.db.usersconnectionString
+		const userConnectionString = credentials.mongo.db.usersconnectionString
         mongoose.connect(userConnectionString)
 	}
+    create_and_initilize_router(){
+        const express = require('express')
+
+        const session = require('express-session');
+        const cookieParser = require('cookie-parser');
+        const flash = require('connect-flash')
+        const router = express()
+        router.use(cookieParser('secret')); //TODO move to models
+        router.use(session({cookie: { maxAge: 900000 }}));
+        router.use(flash());
+        router.use(express.static(__dirname+'/frontEnd')) //TODO figure this out
+        router.use(require("body-parser")());
+        router.set('port', process.env.port || 3000)
+        return router
+    }
+    create_and_initialize_Team_upUsers(){
+        const Team_upUsers = require("./Team-upSchema.js")
+        return Team_upUsers
+    }
+    create_and_initialize_Team_upActivities(){
+        const Team_upActivities = require("./ActivitiesSchema.js")
+        return Team_upActivities
+    }
+    create_and_initialize_Team_upGroups(){
+        const Team_upGroups = require("./GroupsSchema.js")
+        return Team_upGroups
+    }
     
 	// var close_db_connection = function(){
 		// // close database connection
@@ -53,11 +68,15 @@ class Database_Manager{
 // }
 
 
-app.set('port', process.env.port || 3000)
-var mongoose = require('mongoose')
+
+
 // Kathan wuz here :) lol
-const databaseManager = new Database_Manager();
-databaseManager.create_db_connection(mongoose,credentials)
+const creatorClass = new Creator_class();
+creatorClass.create_db_connection(mongoose,credentials)
+app = creatorClass.create_and_initilize_router()
+const Team_upUsers = creatorClass.create_and_initialize_Team_upUsers()
+const Team_upActivities = creatorClass.create_and_initialize_Team_upActivities()
+const Team_upGroups = creatorClass.create_and_initialize_Team_upGroups()
 app.get('/', function(req, res){
     // res.type('text/html')
     // res.write("<h1>Welcome to the home page</h1>")
@@ -82,6 +101,37 @@ app.get('/activties', function(req,res){
     //TODO
     var activties = get_activities();
     
+})
+
+
+app.get('/openGroupPage', function(req,res){
+    
+    // console.log(req.params)
+    
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    else{
+        res.sendFile(frontEndPath+'/groupPage.html');
+    }
+})
+
+
+app.get('/openActivityPage', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    else{
+        res.sendFile(frontEndPath+'/activityPage.html');
+    }
 })
 
 //not tested!!!!
@@ -462,7 +512,7 @@ app.post('/process-login', function(req,res){
         else if(passwordEncrypter.comparePassword(req.body.password,Team_upUser[0].password)){
             console.log("login successful")
             //TODO add cookie for successful login
-            res.cookie("userEmail",req.body.email,{maxAge:360000})
+            res.cookie("userEmail",req.body.email,{maxAge:900000})
             res.redirect('/home')
             
             // res.write("<h1>Welcome to the home page</h1>")
@@ -560,7 +610,8 @@ app.post('/process-signup', function(req,res){
             activity: "",
         }).save(function(err, a){
             if(err) return res.send(500, "Error occured: database error")
-            res.json({id:a._id})
+            res.cookie("userEmail",req.body.email,{maxAge:900000})
+            res.sendFile(frontEndPath+'/home.html');
         })
         console.log("success!")
         // TODO catch err
