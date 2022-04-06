@@ -41,6 +41,7 @@ body {
   bottom: 0;
   left: 0;
   height: 93vh;
+  z-index: 10;
 }
 
 .navFull {
@@ -69,6 +70,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .topBanner h1 {
@@ -123,23 +125,37 @@ body {
 }
 
 .result {
-  background-color: lightgray;
+  background-color: #22303C;
   width: 25vw;
   height: 10vh;
   border-radius: 10px;
   margin: 30px;
-  color: #121212;
+  color: white;
+  border: #8899A6 2px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all .2s;
+}
+
+.result:hover {
+  width: 26vw;
+  height:11vh;
+  background-color: #192734;
+  box-shadow: 5px 5px 10px #888888;
 }
 
 .result h1, .result p {
-  margin:0
+  margin:0;
 }
 
 .result a {
   text-decoration: none;
 }
 
-
+.result p{
+  color: lightblue;
+}
 
 .hide {
   max-height: 0 !important;

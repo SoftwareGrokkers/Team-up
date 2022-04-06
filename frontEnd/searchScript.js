@@ -62,14 +62,19 @@ function handleTitleChange(e){
         for (let i = 0; i < groupsData.length; i++) {
           var resultDiv = document.createElement("div");
           var link = document.createElement("a")
-
+          
+          link.href = "/openGroupPage"
+          
           resultDiv.classList.add("result");
           resultDiv.id = groupsData[i].Name;
     
           var groupName = document.createElement("h1");
+          var groupDescription = document.createElement("p");
+
           groupName.appendChild(document.createTextNode(groupsData[i].Name));
     
           resultDiv.appendChild(groupName);
+          resultDiv.appendChild(groupDescription)
           link.appendChild(resultDiv)
           searchResultsDiv.appendChild(link);
         }
@@ -96,13 +101,18 @@ function handleTitleChange(e){
           var resultDiv = document.createElement("div");
           var link = document.createElement("a")
 
+          link.href = "/openActivityPage"
+          
           resultDiv.classList.add("result");
           resultDiv.id = activitiesData[i].Name;
     
           var activityName = document.createElement("h1");
+          var activityDescription = document.createElement("p")
           activityName.appendChild(document.createTextNode(activitiesData[i].Name));
+          activityDescription.appendChild(document.createTextNode(activitiesData[i].description))
     
           resultDiv.appendChild(activityName);
+          resultDiv.appendChild(activityDescription)
           link.appendChild(resultDiv)
           searchResultsDiv.appendChild(link);
         }
