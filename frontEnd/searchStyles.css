@@ -128,7 +128,18 @@ body {
   height: 10vh;
   border-radius: 10px;
   margin: 30px;
+  color: #121212;
 }
+
+.result h1, .result p {
+  margin:0
+}
+
+.result a {
+  text-decoration: none;
+}
+
+
 
 .hide {
   max-height: 0 !important;
