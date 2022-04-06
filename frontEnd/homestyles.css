@@ -2,6 +2,7 @@
 
 body {
   font-family: "Work Sans", sans-serif;
+  background-color: #15202B;
 }
 
 .fa-solid {
@@ -69,6 +70,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: white 1px solid;
+  z-index: 100;
 }
 
 .topBanner h1 {
@@ -94,20 +97,54 @@ body {
 
 .group,
 .activity {
-  background-color: lightgray;
+  background-color: #22303C;
   width: 25vw;
-  margin-right: 30px;
-  height: 25vh;
+  height: 10vh;
   border-radius: 10px;
   margin: 30px;
+  color: white;
+  border: #8899A6 2px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all .2s;
+}
+
+a {
+  text-decoration: none;
 }
 
 .groupActivityTitles {
   width: 43vw;
   text-align: center;
+  color:white;
 }
 
-.group h1,
-.group h1 {
+.group h2,
+.activity h2 {
   text-align: center;
+  margin: 0;
+}
+
+.group p, .activity p {
+  text-align: center;
+  margin: 0;
+  color: lightblue;
+}
+
+.group:hover,
+.activity:hover {
+  width: 26vw;
+  height:11vh;
+  background-color: #192734;
+  box-shadow: 5px 5px 10px #888888;
+}
+
+.split {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 93vh;
+  width:.05vw;
+  background-color: white;
 }

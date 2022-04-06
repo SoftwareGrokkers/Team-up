@@ -40,12 +40,20 @@ for (let i = 0; i < groupsData.length; i++) {
   var allGroupsDiv = document.getElementById('groups');
   var groupdiv = document.createElement('div');
   var link = document.createElement('a');
+  
+  // link.href = "/openGroupPage?groupName=${groupsData[i].Name}"
+  link.href = "/openGroupPage"
+  
   groupdiv.classList.add('group');
 
   var groupName = document.createElement("h1");
+  var groupDescription = document.createElement("p")
+
   groupName.appendChild(document.createTextNode(groupsData[i].Name));
+  groupDescription.appendChild(document.createTextNode(groupssData[i].description))
 
   groupdiv.appendChild(groupName);
+  groupdiv.appendChild(groupDescription)
   link.appendChild(groupdiv)
   allGroupsDiv.appendChild(link);
 }
@@ -54,13 +62,20 @@ for (let i = 0; i < activitiesData.length; i++) {
   var allGroupsDiv = document.getElementById('activities');
   var groupdiv = document.createElement('div');
   var link = document.createElement('a')
+  
+  // link.href = "/openActivityPage?activityName=${activitiesData[i].Name}"
+  link.href = "/openActivityPage"
+  
   groupdiv.classList.add('activity');
 
   var groupName = document.createElement("h1");
-  groupName.appendChild(document.createTextNode(activitiesData[i].Name));
+  var groupDescription = document.createElement("p")
 
+  groupName.appendChild(document.createTextNode(activitiesData[i].Name));
+  groupDescription.appendChild(document.createTextNode(activitiesData[i].description))
 
   groupdiv.appendChild(groupName);
+  groupdiv.appendChild(groupDescription)
   link.appendChild(groupdiv)
   allGroupsDiv.appendChild(link);
 }
