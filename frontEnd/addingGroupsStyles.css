@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Sigmar+One&display=swap");
+
+body {
+  font-family: "Work Sans", sans-serif;
+}
+
+.fa-solid {
+  font-size: 1.5em;
+  color: white;
+  margin: 1.8em 0.4em;
+}
+
+.fa-bars,
+.fa-x {
+  margin-top: 15px;
+}
+
+.nav .fa-gear {
+  position: absolute;
+  bottom: 4.2em;
+}
+
+#settings {
+  position: absolute;
+  bottom: 6em;
+}
+
+.nav .fa-arrow-right-from-bracket,
+#logout {
+  position: absolute;
+  bottom: 0em;
+}
+
+.container {
+  position: absolute;
+}
+
+.nav,
+.navFull {
+  background: #121212;
+  border: 1px #121212 solid;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 93vh;
+}
+
+.navFull {
+  width: 12vw;
+  transition: all 0.3s linear;
+  transform: translateX(-100%);
+}
+
+.showNav {
+  transform: translateX(0);
+}
+
+.topBanner {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 134, 138, 1) 0%,
+    rgba(0, 79, 115, 1) 46%,
+    rgba(48, 0, 79, 1) 100%
+  );
+  width: 100vw;
+  height: 7vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topBanner h1 {
+  color: white;
+}
+
+.navFull p {
+  display: inline;
+  color: white;
+  font-size: 1.5em;
+  margin-left: 0.5em;
+}
+
+/* Group Page */
+
+.addBox {
+  width: 20em;
+  height: 23em;
+  position: relative;
+  margin: 6% auto;
+  background: rgb(8, 166, 228);
+  border-radius: 1em;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.buttonBG {
+  width: 13em;
+  margin: 1em auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #0000001f;
+  border-radius: 30px;
+}
+
+.createButtons {
+  padding: 0.75em 1em;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  color: rgb(255, 255, 255);
+}
+
+#buttons {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 6.35em;
+  height: 100%;
+  background: rgb(5, 28, 238);
+  border-radius: 30px;
+  transition: .35s;
+}
+
+.activitiesForm {
+  top: 6em;
+  position: absolute;
+  width: 280px;
+  transition: .35s;
+}
+
+.groupInput {
+  width: 100%;
+  padding: 1em 0;
+  margin: 0.25em 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+  border-radius: 8px;
+  outline: none;
+}
+
+.submitCreate {
+  position: center;
+  width: 15em;
+  padding: 1em 3em;
+  cursor: pointer;
+  display: block;
+  margin: 1em 6.5em;
+  background: rgb(5, 28, 238);
+  border: 0;
+  outline: none;
+  border-radius: 3em;
+  color:rgb(255, 255, 255);
+}
+
+#createGroup {
+  left: 0.5em;
+}
+
+#createActivity {
+  left: 23em;
+}
