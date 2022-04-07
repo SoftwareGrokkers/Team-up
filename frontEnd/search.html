@@ -16,50 +16,23 @@
     <div class="topBanner">
       <h1>Team Up</h1>
     </div>
-    <div class="nav">
-      <span id="navBtn"
-        ><a href="#"><i class="fa-solid fa-bars"></i></a
-      ></span>
+    <div class = "nav">
+      <a href="#"><i class="fa-solid fa-bars" onclick="openNav()"></i></a>
       <a href="/home"><i class="fa-solid fa-house"></i></a>
-      <a href="/searchGroupsAndActivitiesPage"
-        ><i class="fa-solid fa-magnifying-glass"></i
-      ></a>
-      <a href="createGroupsAndActivitiesPage"
-        ><i class="fa-solid fa-user-group"></i
-      ></a>
-      <a href="#"><i class="fa-solid fa-gear"></i></a>
-      <a href="/process-logout"
-        ><i class="fa-solid fa-arrow-right-from-bracket"></i
-      ></a>
+      <a href="/searchGroupsAndActivitiesPage"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="/createGroupsAndActivitiesPage"><i class="fa-solid fa-user-group"></i></a>
+      <a href="#" class="fa-solid fa-gear"></a>
+      <a href="/process-logout" class="fa-solid fa-arrow-right-from-bracket"></a>
     </div>
 
-    <div class="navFull" id="navFull">
-      <span id="navClose"
-        ><i class="fa-solid fa-bars"></i>
-        <p>Menu</p></span
-      >
-
-      <span
-        ><a href="#"><i class="fa-solid fa-house"></i></a>
-        <p>Home</p></span
-      >
-      <span
-        ><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <p>Search</p></span
-      >
-      <span
-        ><a href="#"><i class="fa-solid fa-user-group"></i></a>
-        <p>Groups</p></span
-      >
-      <span id="settings"
-        ><a href="#"><i class="fa-solid fa-gear"></i></a>
-        <p>Settings</p></span
-      >
-      <span id="logout"
-        ><a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        <p>Logout</p></span
-      >
-    </div>
+    <div id="myNavFull" class = "navFull">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Menu</a>
+      <a href="/home">Home</a>
+      <a href="/searchGroupsAndActivitiesPage">Search</a>
+      <a href="/createGroupsAndActivitiesPage">Groups</a>
+      <a href="#" class = "settings">Settings</a>
+      <a href="/process-logout" class = logout>Logout</a>
+  </div>
 
     <div class="search">
       <div class="searchOptions">
@@ -99,17 +72,14 @@
     <script src="searchScript.js"></script>
     <!-- Expand nav bar -->
     <script>
-      const navBtn = document.getElementById("navBtn");
-      const navFull = document.getElementById("navFull");
-      const navClose = document.getElementById("navClose");
+      // Open and close nav bar
+      function openNav() {
+        document.getElementById("myNavFull").style.width = "125px";
+      }
 
-      navBtn.addEventListener("click", () => {
-        navFull.classList.add("showNav");
-      });
-
-      navClose.addEventListener("click", () => {
-        navFull.classList.remove("showNav");
-      });
+      function closeNav() {
+        document.getElementById("myNavFull").style.width = "0";
+      }
 
       // Search Test
       // var searchInput = document.getElementById("searchBar");
