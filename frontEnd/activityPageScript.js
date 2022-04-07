@@ -1,15 +1,15 @@
 // Open and close nav bar
-const navBtn = document.getElementById("navBtn");
-const navFull = document.getElementById("navFull");
-const navClose = document.getElementById("navClose");
+function openNav() {
+  document.getElementById("myNavFull").style.width = "125px";
+}
 
-navBtn.addEventListener("click", () => {
-  navFull.classList.add("showNav");
-});
+function closeNav() {
+  document.getElementById("myNavFull").style.width = "0";
+}
 
-navClose.addEventListener("click", () => {
-  navFull.classList.remove("showNav");
-});
+function dropMenu() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
 
 var getActivityCookie = function(){
     Cookies = document.cookie.split(";")
