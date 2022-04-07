@@ -1,15 +1,11 @@
 // Open and close nav bar
-const navBtn = document.getElementById("navBtn");
-const navFull = document.getElementById("navFull");
-const navClose = document.getElementById("navClose");
+function openNav() {
+  document.getElementById("myNavFull").style.width = "125px";
+}
 
-navBtn.addEventListener("click", () => {
-  navFull.classList.add("showNav");
-});
-
-navClose.addEventListener("click", () => {
-  navFull.classList.remove("showNav");
-});
+function closeNav() {
+  document.getElementById("myNavFull").style.width = "0";
+}
 console.log(document.cookie)
 var getGroupCookie = function(){
     Cookies = document.cookie.split(";")

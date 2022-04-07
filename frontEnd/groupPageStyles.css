@@ -3,87 +3,107 @@
 body {
   font-family: "Work Sans", sans-serif;
 }
-
-.fa-solid {
-  font-size: 1.5em;
-  color: white;
-  margin: 1.8em 0.4em;
-}
-
-.fa-bars,
-.fa-x {
-  margin-top: 15px;
-}
-
-.nav .fa-gear {
-  position: absolute;
-  bottom: 4.2em;
-}
-
-#settings {
-  position: absolute;
-  bottom: 6em;
-}
-
-.nav .fa-arrow-right-from-bracket,
-#logout {
-  position: absolute;
-  bottom: 0em;
-}
-
-.container {
-  position: absolute;
-}
-
-.nav,
-.navFull {
-  background: #121212;
-  border: 1px #121212 solid;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 93vh;
-}
-
-.navFull {
-  width: 12vw;
-  transition: all 0.3s linear;
-  transform: translateX(-100%);
-}
-
-.showNav {
-  transform: translateX(0);
-}
-
 .topBanner {
   background: linear-gradient(
     90deg,
-    rgba(0, 134, 138, 1) 0%,
-    rgba(0, 79, 115, 1) 46%,
-    rgba(48, 0, 79, 1) 100%
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
   );
-  width: 100vw;
-  height: 7vh;
   position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 7vh;
   top: 0;
   left: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 3;
 }
 
 .topBanner h1 {
-  color: white;
+  color: rgb(255, 255, 255);
+  position: relative;
+  left: 50%;
 }
 
-.navFull p {
-  display: inline;
-  color: white;
-  font-size: 1.5em;
-  margin-left: 0.5em;
+.nav {
+  background: linear-gradient(
+    180deg,
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
+  );
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 8%;
+  margin-top: 4vh;
+  left: 0;
+  align-items: center;
+}
+
+.nav a {
+  color: azure;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 25px;
+}
+
+.fa-gear {
+  position: relative;
+  top: 45vh;
+}
+
+.fa-arrow-right-from-bracket {
+  position: relative;
+  top: 45vh;
+}
+
+.nav a:hover {
+  color: rgb(240, 219, 36);
+}
+
+.navFull {
+  background: linear-gradient(
+    180deg,
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
+  );
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 0;
+  margin-top: 4vh;
+  left: 8%;
+  align-items: center;
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index: 3;
+}
+.navFull a {
+  color: azure;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 25px;
+  transform: 0.3s;
+}
+
+.settings {
+  position: relative;
+  top: 45vh;
+}
+
+.logout {
+  position: relative;
+  top: 45vh;
+}
+
+.navFull a:hover {
+  color: rgb(240, 219, 36);
 }
 
 #groupInfo {
@@ -98,20 +118,20 @@ body {
 
 .message {
   border: black 2px solid;
-  height:45vh;
-  width: 93vw;
+  height:65vh;
+  width: 75vw;
   position: absolute;
-  bottom: 25%;
-  right: 1.5%;
+  bottom: 10%;
+  right: 5.5%;
 }
 
 .yourMessage {
   border: lightblue 10px solid;
-  width: 88vw;
+  width: 70vw;
   height: 7vh;
   position: relative;
   left: 1.2%;
-  top: 1%;
+  top: 520px;
   color: gray;
   font-size: 1em;
   padding: 10px;
@@ -119,10 +139,16 @@ body {
   margin-top: .5em;
 }
 
+.container{
+  position: relative;
+  bottom: 18%;
+}
+
+
 .fakeMessageBox {
   margin: 1em;
   height: 8vh;
-  width: 88vw;
+  width: 70vw;
   padding-top: 10px;
   padding-left: 10px;
   background-color: rgb(240, 240, 240);
@@ -139,7 +165,7 @@ body {
   font-size: 1.5em;
   border-radius: 10px;
   border: black 2px solid;
-  background-color: lightgreen;
+  background-color: rgb(171, 238, 144);
   color: black;
   text-decoration: none;
   padding: .3em;
