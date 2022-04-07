@@ -3,168 +3,286 @@
 body {
   font-family: "Work Sans", sans-serif;
 }
-
-.fa-solid {
-  font-size: 1.5em;
-  color: white;
-  margin: 1.8em 0.4em;
-}
-
-.fa-bars,
-.fa-x {
-  margin-top: 15px;
-}
-
-.nav .fa-gear {
-  position: absolute;
-  bottom: 4.2em;
-}
-
-#settings {
-  position: absolute;
-  bottom: 6em;
-}
-
-.nav .fa-arrow-right-from-bracket,
-#logout {
-  position: absolute;
-  bottom: 0em;
-}
-
-.container {
-  position: absolute;
-}
-
-.nav,
-.navFull {
-  background: #121212;
-  border: 1px #121212 solid;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 93vh;
-}
-
-.navFull {
-  width: 12vw;
-  transition: all 0.3s linear;
-  transform: translateX(-100%);
-}
-
-.showNav {
-  transform: translateX(0);
-}
-
 .topBanner {
   background: linear-gradient(
     90deg,
-    rgba(0, 134, 138, 1) 0%,
-    rgba(0, 79, 115, 1) 46%,
-    rgba(48, 0, 79, 1) 100%
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
   );
-  width: 100vw;
-  height: 7vh;
   position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 7vh;
   top: 0;
   left: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 3;
 }
 
 .topBanner h1 {
-  color: white;
+  color: rgb(255, 255, 255);
+  position: relative;
+  left: 50%;
 }
 
-.navFull p {
-  display: inline;
-  color: white;
-  font-size: 1.5em;
-  margin-left: 0.5em;
+.nav {
+  background: linear-gradient(
+    180deg,
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
+  );
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 8%;
+  margin-top: 4vh;
+  left: 0;
+  align-items: center;
+}
+
+.nav a {
+  color: azure;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 25px;
+}
+
+.fa-gear {
+  position: relative;
+  top: 45vh;
+}
+
+.fa-arrow-right-from-bracket {
+  position: relative;
+  top: 45vh;
+}
+
+.nav a:hover {
+  color: rgb(240, 219, 36);
+}
+
+.navFull {
+  background: linear-gradient(
+    180deg,
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
+  );
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 0;
+  margin-top: 4vh;
+  left: 8%;
+  align-items: center;
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index: 3;
+}
+.navFull a {
+  color: azure;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 25px;
+  transform: 0.3s;
+}
+
+.settings {
+  position: relative;
+  top: 45vh;
+}
+
+.logout {
+  position: relative;
+  top: 45vh;
+}
+
+.navFull a:hover {
+  color: rgb(240, 219, 36);
 }
 
 /* Group Page */
 
-.addBox {
-  width: 20em;
-  height: 23em;
+#groupSide{
   position: relative;
-  margin: 6% auto;
-  background: rgb(8, 166, 228);
-  border-radius: 1em;
-  padding: 5px;
-  overflow: hidden;
+  top: 200px;
+  left: 225px;
 }
 
-.buttonBG {
-  width: 13em;
-  margin: 1em auto;
+#activitySide{
   position: relative;
-  box-shadow: 0 0 20px 9px #0000001f;
-  border-radius: 30px;
+  top: 400px;
+  left: 225px;
 }
 
-.createButtons {
-  padding: 0.75em 1em;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  outline: none;
-  position: relative;
-  color: rgb(255, 255, 255);
-}
-
-#buttons {
-  top: 0;
-  left: 0;
-  position: absolute;
-  width: 6.35em;
-  height: 100%;
-  background: rgb(5, 28, 238);
-  border-radius: 30px;
-  transition: .35s;
-}
-
-.activitiesForm {
-  top: 6em;
-  position: absolute;
-  width: 280px;
-  transition: .35s;
-}
-
-.groupInput {
+/* Full-width input fields */
+input[type=text], input[type=password] {
   width: 100%;
-  padding: 1em 0;
-  margin: 0.25em 0;
-  border-left: 0;
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 1px solid #999;
-  border-radius: 8px;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
   outline: none;
 }
 
-.submitCreate {
-  position: center;
-  width: 15em;
-  padding: 1em 3em;
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
   cursor: pointer;
-  display: block;
-  margin: 1em 6.5em;
-  background: rgb(5, 28, 238);
-  border: 0;
-  outline: none;
-  border-radius: 3em;
-  color:rgb(255, 255, 255);
+  width: 100%;
+  opacity: 0.9;
 }
 
-#createGroup {
-  left: 0.5em;
+.createButton{
+  position: relative;
+  left: 300px;
+  top: 100px;
 }
 
-#createActivity {
-  left: 23em;
+.createButton2{
+  position: relative;
+  left: 165px;
+  top: 450px;
 }
+
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .createbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+#groupMenu .modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 70vw; /* Could be more or less, depending on screen size */
+  height: 65vh;
+}
+
+#activityMenu .modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 70vw; /* Could be more or less, depending on screen size */
+  height: 80vh;
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 300px;
+  top: 150px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .createbtn {
+     width: 100%;
+  }
+}
+
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+/*
+
+input[type=create] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=create]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  position: relative;
+  height: 40vh;
+  width: 70vw;
+  top: 300px;
+  left: 250px;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+*/

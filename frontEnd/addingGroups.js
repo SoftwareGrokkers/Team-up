@@ -1,27 +1,24 @@
-const navBtn = document.getElementById("navBtn");
-const navFull = document.getElementById("navFull");
-const navClose = document.getElementById("navClose");
+function openNav() {
+    document.getElementById("myNavFull").style.width = "125px";
+  }
+  
+  function closeNav() {
+    document.getElementById("myNavFull").style.width = "0";
+  }
+  var modal = document.getElementById('groupMenu');
 
-navBtn.addEventListener("click", () => {
-    navFull.classList.add("showNav");
-});
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 
-navClose.addEventListener("click", () => {
-    navFull.classList.remove("showNav");
-});
+  var modal = document.getElementById('activityMenu');
 
-var createGroup = document.getElementById("createGroup");
-var createActivity = document.getElementById("createActivity");
-var buttons = document.getElementById("buttons");
-
-function pullCreateGroup() {
-    createGroup.style.left = "-22.5em";
-    createActivity.style.left = "0.5em";
-    buttons.style.left = "110px";
-}
-
-function pullCreateActivity() {
-    createGroup.style.left = "0.5em";
-    createActivity.style.left = "23em";
-    buttons.style.left = "0";
-}
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
