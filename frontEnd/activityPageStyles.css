@@ -104,6 +104,9 @@ body {
   border-radius: 10px;
   border: black 2px solid;
   background-color: lightgreen;
+  padding: .3em;
+  text-decoration: none;
+  color: black;
 }
 
 .radio-toolbar {

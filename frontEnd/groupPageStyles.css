@@ -140,4 +140,7 @@ body {
   border-radius: 10px;
   border: black 2px solid;
   background-color: lightgreen;
+  color: black;
+  text-decoration: none;
+  padding: .3em;
 }

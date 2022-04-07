@@ -118,7 +118,7 @@ app.get('/openGroupPage*', function(req,res){
         console.log("not logged in")
     }
     else{
-        res.cookie("groupName",req.query.groupName,{maxAge:9000})
+        res.cookie("groupName",req.query.groupName,{maxAge:900000})
         res.sendFile(frontEndPath+'/groupPage.html');
     }
 })
@@ -133,7 +133,7 @@ app.get('/openActivityPage*', function(req,res){
         console.log("not logged in")
     }
     else{
-        res.cookie("activityName",req.query.activityName,{maxAge:9000})
+        res.cookie("activityName",req.query.activityName,{maxAge:900000})
         res.sendFile(frontEndPath+'/activityPage.html');
     }
 })
@@ -300,9 +300,87 @@ app.get('/allGroups', function(req,res){
 })
 
 
+
 app.get('/joinGroup', function(req,res){
+    var groupCookie = req.cookies
+    
+    Team_upGroups.find({"Name":groupCookie.groupName}, function(err, Team_upGroup){
+        var group = Team_upGroup[0]
+        
+        Team_upUsers.find({email:groupCookie.userEmail}, function(err,Team_upUser){
+            var groupList = []
+            
+            var newgroup = {
+            "Name": group.Name,
+            "type": group.type,
+            "description": group.description,
+            "creator": groupCookie.userEmail
+            }
+            
+            for(var i=0; i<Team_upUser[0].groups.length; i++){
+                groupList.push(Team_upUser[0].groups[i])
+            }
+            
+            groupList.push(newgroup)
+            
+            var update = {
+                groups: groupList
+            }
+            
+            var filter = {"email":groupCookie.userEmail}
+            
+            Team_upUsers.findOneAndUpdate(filter,update,function(err,doc){
+                console.log("successfully updated")
+            })
+        })
+    })
+    
     res.redirect("/home")
 })
+
+
+
+app.get('/joinActivity', function(req,res){
+    var activityCookie = req.cookies
+    
+    Team_upActivities.find({"Name":activityCookie.activityName}, function(err, Team_upActivity){
+        var activity = Team_upActivity[0]
+        
+        Team_upUsers.find({email:activityCookie.userEmail}, function(err, Team_upUser){
+            var activityList = []
+            
+            var newActivity = {
+            "Name": activity.Name,
+            "type": activity.type,
+            "description": activity.description,
+            "location": activity.location,
+            "time": activity.time, // TODO parse time
+            "creator": activityCookie.userEmail
+            }
+            for(var i=0; i<Team_upUser[0].activities.length; i++){
+                activityList.push(Team_upUser[0].activities[i])
+            }
+            
+            activityList.push(newActivity)
+            // console.log(Team_upUser[0].activities)
+            // console.log("activity list inside q: ", aactivityList)
+            
+            var update = {
+                activities: activityList
+            }
+            
+            var filter = {"email":activityCookie.userEmail}
+            
+            Team_upUsers.findOneAndUpdate(filter,update,function(err,doc){
+                console.log("successfully updated")
+            })
+        })
+    })
+    
+    res.redirect("/home")
+})
+
+
 
 app.get('/searchGroupsAndActivitiesPage', function(req,res){
     var userCookie = req.cookies
