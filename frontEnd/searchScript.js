@@ -63,7 +63,7 @@ function handleTitleChange(e){
           var resultDiv = document.createElement("div");
           var link = document.createElement("a")
           
-          link.href = "/openGroupPage"
+          link.href = `/openGroupPage?groupName=${groupsData[i].Name}`
           
           resultDiv.classList.add("result");
           resultDiv.id = groupsData[i].Name;
@@ -98,7 +98,7 @@ function handleTitleChange(e){
           var resultDiv = document.createElement("div");
           var link = document.createElement("a")
 
-          link.href = "/openActivityPage"
+          link.href = `/openActivityPage?activityName=${activitiesData[i].Name}`
           
           resultDiv.classList.add("result");
           resultDiv.id = activitiesData[i].Name;

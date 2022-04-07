@@ -11,12 +11,27 @@ navClose.addEventListener("click", () => {
   navFull.classList.remove("showNav");
 });
 
+var getActivityCookie = function(){
+    Cookies = document.cookie.split(";")
+    groupCookie = Cookies[1]
+    goodCookie = groupCookie.replace("%20", " ")
+    return goodCookie
+}
+
+var activityCookie = getActivityCookie()
+
 var request = new XMLHttpRequest();
-request.open('GET', "#")
+const userActivitiesUrl = `http://localhost:3000/userActivityPage?cookie=${activityCookie}`
+request.open('GET', userActivitiesUrl,false)
 request.send()
 
-//var activityData = JSON.parse(request.responseText);
-var activityData = {Name: "Football Game", type : "Sport", description: "its a sport", creator: "John Smith", location: "Baton Rouge", time: "12 PM"}
+try{
+    var activityData = JSON.parse(request.responseText);
+    console.log(activityData)
+}
+catch(error){
+    var activityData = {Name: "Football Game", type : "Sport", description: "its a sport", creator: "John Smith", location: "Baton Rouge", time: "12 PM"}
+}
 
 var activityInfo = document.getElementById('activityInfo')
 var activityName = document.createElement("h1");

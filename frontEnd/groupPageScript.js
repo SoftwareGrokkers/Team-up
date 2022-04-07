@@ -10,12 +10,24 @@ navBtn.addEventListener("click", () => {
 navClose.addEventListener("click", () => {
   navFull.classList.remove("showNav");
 });
-console.log(document)
+console.log(document.cookie)
+var getGroupCookie = function(){
+    Cookies = document.cookie.split(";")
+    groupCookie = Cookies[1]
+    goodCookie = groupCookie.replace("%20", " ")
+    return goodCookie
+}
+// var getUserCookie = function(){
+    // rawCookie = document.cookie
+// }
+var groupCookie = getGroupCookie()
 var request = new XMLHttpRequest();
-request.open('GET', "#")
+const userGroupsUrl = `http://localhost:3000/userGroupPage?cookie=${groupCookie}`
+request.open('GET', userGroupsUrl, false)
 request.send()
 try{
     var groupData = JSON.parse(request.responseText);
+    console.log(groupData)
 }
 catch(error){
     var groupData = {Name: "Soccer", type : "Sport", description: "its a sport", creator: "John Smith"}

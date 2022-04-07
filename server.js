@@ -15,6 +15,7 @@ const passwordEncrypter = require("./models/passwordEncrypter.js")
 
 
 const path = require('path')
+
 class Creator_class{
 	create_db_connection(mongoose,credentials) {
 		const userConnectionString = credentials.mongo.db.usersconnectionString
@@ -104,10 +105,11 @@ app.get('/activties', function(req,res){
 })
 
 
-app.get('/openGroupPage', function(req,res){
+app.get('/openGroupPage*', function(req,res){
     
     // console.log(req.params)
-    
+    // console.log(req.query)
+    // console.log(res)
     var userCookie = req.cookies
     
     
@@ -116,12 +118,13 @@ app.get('/openGroupPage', function(req,res){
         console.log("not logged in")
     }
     else{
+        res.cookie("groupName",req.query.groupName,{maxAge:9000})
         res.sendFile(frontEndPath+'/groupPage.html');
     }
 })
 
 
-app.get('/openActivityPage', function(req,res){
+app.get('/openActivityPage*', function(req,res){
     var userCookie = req.cookies
     
     
@@ -130,6 +133,7 @@ app.get('/openActivityPage', function(req,res){
         console.log("not logged in")
     }
     else{
+        res.cookie("activityName",req.query.activityName,{maxAge:9000})
         res.sendFile(frontEndPath+'/activityPage.html');
     }
 })
@@ -164,6 +168,38 @@ app.get('/userActivities', function(req,res){
         res.json(Team_upUser[0].activities)
     })
     
+})
+
+
+app.get('/userGroupPage', function(req,res){
+    var groupCookie = req.cookies
+    
+    if (groupCookie.userEmail == null){
+        res.redirect("/")
+        console.log("not logged in")
+    }
+    
+    var filter = {"Name":groupCookie.groupName}
+    
+    Team_upGroups.find(filter, function(err,Team_upGroup){
+        res.json(Team_upGroup[0])
+    })
+})
+
+
+app.get('/userActivityPage', function(req,res){
+    var activityCookie = req.cookies
+    
+    if(activityCookie.userEmail == null){
+        res.redirect("/")
+        console.log("not logged in")
+    }
+    
+    var filter = {"Name":activityCookie.activityName}
+    
+    Team_upActivities.find(filter, function(err,Team_upActivity){
+        res.json(Team_upActivity[0])
+    })
 })
 
 
@@ -264,6 +300,10 @@ app.get('/allGroups', function(req,res){
 })
 
 
+app.get('/joinGroup', function(req,res){
+    res.redirect("/home")
+})
+
 app.get('/searchGroupsAndActivitiesPage', function(req,res){
     var userCookie = req.cookies
     
@@ -314,6 +354,12 @@ app.post('/createGroup', function(req,res){
     }
     else{
         var filter = {"email":userCookie.userEmail}
+        var checkexist = {"Name":req.body.groupName}
+        // Team_upGroups.find(checkexist,function(err,Team_upGroup){
+            // if (Team_upGroup.length > 0){
+                // res.redirect("/createGroupsAndActivitiesPage")
+            // }
+        // })
         Team_upUsers.find(filter, function(err, Team_upUser){
             var groupList = []
             
