@@ -16,7 +16,8 @@ const passwordEncrypter = require("./models/passwordEncrypter.js")
 
 const path = require('path')
 
-class Creator_class{
+class server{
+    
 	create_db_connection(mongoose,credentials) {
 		const userConnectionString = credentials.mongo.db.usersconnectionString
         mongoose.connect(userConnectionString)
@@ -27,6 +28,7 @@ class Creator_class{
         const session = require('express-session');
         const cookieParser = require('cookie-parser');
         const flash = require('connect-flash')
+        
         const router = express()
         router.use(cookieParser('secret')); //TODO move to models
         router.use(session({cookie: { maxAge: 900000 }}));
@@ -72,7 +74,7 @@ class Creator_class{
 
 
 // Kathan wuz here :) lol
-const creatorClass = new Creator_class();
+const creatorClass = new server();
 creatorClass.create_db_connection(mongoose,credentials)
 app = creatorClass.create_and_initilize_router()
 const Team_upUsers = creatorClass.create_and_initialize_Team_upUsers()
@@ -202,7 +204,253 @@ app.get('/userActivityPage', function(req,res){
     })
 })
 
+app.get('/userPreferences', function(req,res){
+    
+    class userPreferences {
+      constructor(previousOperandTextElement, currentOperandTextElement) {
+        this.previousOperandTextElement = previousOperandTextElement
+        this.currentOperandTextElement = currentOperandTextElement
+        this.clear()
+      }
 
+      clear() {
+        this.currentOperand = ''
+        this.previousOperand = ''
+        this.operation = undefined
+      }
+
+      delete() {
+        this.currentOperand = this.currentOperand.toString().slice(0, -1)
+      }
+
+      appendNumber(number) {
+        if (number === '.' && this.currentOperand.includes('.')) return
+        this.currentOperand = this.currentOperand.toString() + number.toString()
+      }
+
+      chooseOperation(operation) {
+        if (this.currentOperand === '') return
+        if (this.previousOperand !== '') {
+          this.compute()
+        }
+        this.operation = operation
+        this.previousOperand = this.currentOperand
+        this.currentOperand = ''
+      }
+
+      compute() {
+        let computation
+        const prev = parseFloat(this.previousOperand)
+        const current = parseFloat(this.currentOperand)
+        if (isNaN(prev) || isNaN(current)) return
+        switch (this.operation) {
+          case '+':
+            computation = prev + current
+            break
+          case '-':
+            computation = prev - current
+            break
+          case '*':
+            computation = prev * current
+            break
+          case '÷':
+            computation = prev / current
+            break
+          default:
+            return
+        }
+        this.currentOperand = computation
+        this.operation = undefined
+        this.previousOperand = ''
+      }
+
+      getDisplayNumber(number) {
+        const stringNumber = number.toString()
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
+        if (isNaN(integerDigits)) {
+          integerDisplay = ''
+        } else {
+          integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+        }
+        if (decimalDigits != null) {
+          return `${integerDisplay}.${decimalDigits}`
+        } else {
+          return integerDisplay
+        }
+      }
+
+      updateDisplay() {
+        this.currentOperandTextElement.innerText =
+          this.getDisplayNumber(this.currentOperand)
+        if (this.operation != null) {
+          this.previousOperandTextElement.innerText =
+            `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        } else {
+          this.previousOperandTextElement.innerText = ''
+        }
+      }
+    }
+
+    res.sendFile(frontEndPath+'/eegg.html');
+    // const numberButtons = document.querySelectorAll('[data-number]')
+    // const operationButtons = document.querySelectorAll('[data-operation]')
+    // const equalsButton = document.querySelector('[data-equals]')
+    // const deleteButton = document.querySelector('[data-delete]')
+    
+    
+    // const allClearButton = document.querySelector('[data-all-clear]')
+    // const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+    // const currentOperandTextElement = document.querySelector('[data-current-operand]')
+
+    // const calculator = new userPreferences(previousOperandTextElement, currentOperandTextElement)
+
+    numberButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        calculator.appendNumber(button.innerText)
+        calculator.updateDisplay()
+      })
+    })
+
+    operationButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        calculator.chooseOperation(button.innerText)
+        calculator.updateDisplay()
+      })
+    })
+
+    equalsButton.addEventListener('click', button => {
+      calculator.compute()
+      calculator.updateDisplay()
+    })
+    
+    
+    
+
+    allClearButton.addEventListener('click', button => {
+      calculator.clear()
+      calculator.updateDisplay()
+    })
+
+    deleteButton.addEventListener('click', button => {
+      calculator.delete()
+      calculator.updateDisplay()
+    })
+    
+    
+    function parseTime(time, format, step) {
+	
+	var hour, minute, stepMinute,
+		defaultFormat = 'g:ia',
+		pm = time.match(/p/i) !== null,
+		num = time.replace(/[^0-9]/g, '');
+	
+	// Parse for hour and minute
+	switch(num.length) {
+        
+        
+		case 4:
+			hour = parseInt(num[0] + num[1], 10);
+			minute = parseInt(num[2] + num[3], 10);
+			break;
+            
+		case 3:
+        
+			hour = parseInt(num[0], 10);
+			minute = parseInt(num[1] + num[2], 10);
+			break;
+            
+		case 2:
+        
+        
+		case 1:
+			hour = parseInt(num[0] + (num[1] || ''), 10);
+			minute = 0;
+			break;
+            
+            
+		default:
+			return '';
+	}
+	
+	// Make sure hour is in 24 hour format
+	if( pm === true && hour > 0 && hour < 12 ) hour += 12;
+	
+	// Force pm for hours between 13:00 and 23:00
+	if( hour >= 13 && hour <= 23 ) pm = true;
+	
+	// Handle step
+	if( step ) {
+		// Step to the nearest hour requires 60, not 0
+        
+        
+		if( step === 0 ) step = 60;
+		// Round to nearest step
+		stepMinute = (Math.round(minute / step) * step) % 60;
+        
+        
+		// Do we need to round the hour up?
+		if( stepMinute === 0 && minute >= 30 ) {
+            
+            
+            
+			hour++;
+			// Do we need to switch am/pm?
+			if( hour === 12 || hour === 24 ) pm = !pm;
+		}
+		minute = stepMinute;
+	}
+	
+	// Keep within range
+	if( hour <= 0 || hour >= 24 ) hour = 0;
+	if( minute < 0 || minute > 59 ) minute = 0;
+
+	// Format output
+	return (format || defaultFormat)
+		// 12 hour without leading 0
+        .replace(/g/g, hour === 0 ? '12' : 'g')
+        
+        
+		.replace(/g/g, hour > 12 ? hour - 12 : hour)
+		// 24 hour without leading 0
+        
+        
+		.replace(/G/g, hour)
+		// 12 hour with leading 0
+		.replace(/h/g, hour.toString().length > 1 ? (hour > 12 ? hour - 12 : hour) : '0' + (hour > 12 ? hour - 12 : hour))
+        
+        
+		// 24 hour with leading 0
+		.replace(/H/g, hour.toString().length > 1 ? hour : '0' + hour)
+        
+        
+		// minutes with leading zero
+		.replace(/i/g, minute.toString().length > 1 ? minute : '0' + minute)
+		// simulate seconds
+		.replace(/s/g, '00')
+		// lowercase am/pm
+        
+        
+		.replace(/a/g, pm ? 'pm' : 'am')
+		// lowercase am/pm
+		.replace(/A/g, pm ? 'PM' : 'AM');
+    }
+
+    var tests = [
+      '1:00 pm','1:00 p.m.','1:00 p','1:00pm','1:00p.m.','1:00p','1 pm',
+      '1 p.m.','1 p','1pm','1p.m.', '1p', '13:00','13', '1a', '12', '12a', '12p', '12am', '12pm', '2400am', '2400pm', '2400', 
+      '1000', '100', '123', '2459', '2359', '2359am', '1100', '123p',
+      '1234', '1', '9', '99', '999', '9999', '99999', '0000', '0011', '-1', 'mioaw' ];
+
+
+
+    for ( var i = 0; i < tests.length; i++ ) {
+      console.log( tests[i].padStart( 9, ' ' ) + " = " + parseTime(tests[i]) );
+    }
+    
+    
+})
 app.get('/allActivities', function(req,res){
     var userCookie = req.cookies
     

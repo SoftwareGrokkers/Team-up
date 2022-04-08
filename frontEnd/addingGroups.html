@@ -15,144 +15,134 @@
     <div class="topBanner">
       <h1>Team Up</h1>
     </div>
-    <div class="nav">
-      <span id="navBtn"
-        ><a href="#"><i class="fa-solid fa-bars"></i></a
-      ></span>
+    <div class = "nav">
+      <a href="#"><i class="fa-solid fa-bars" onclick="openNav()"></i></a>
       <a href="/home"><i class="fa-solid fa-house"></i></a>
-      <a href="/searchGroupsAndActivitiesPage"
-        ><i class="fa-solid fa-magnifying-glass"></i
-      ></a>
-      <a href="createGroupsAndActivitiesPage"
-        ><i class="fa-solid fa-user-group"></i
-      ></a>
-      <a href="#"><i class="fa-solid fa-gear"></i></a>
-      <a href="/process-logout"
-        ><i class="fa-solid fa-arrow-right-from-bracket"></i
-      ></a>
-    </div>
+      <a href="/searchGroupsAndActivitiesPage"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="/createGroupsAndActivitiesPage"><i class="fa-solid fa-user-group"></i></a>
+      <a href="#" class="fa-solid fa-gear"></a>
+      <a href="/process-logout" class="fa-solid fa-arrow-right-from-bracket"></a>
+  </div>
 
-    <div class="navFull" id="navFull">
-      <span id="navClose"
-        ><i class="fa-solid fa-bars"></i>
-        <p>Menu</p></span
-      >
-      <span
-        ><a href="/home"><i class="fa-solid fa-house"></i></a>
-        <p>Home</p></span
-      >
-      <span
-        ><a href="/searchGroupsAndActivitiesPage"
-          ><i class="fa-solid fa-magnifying-glass"></i
-        ></a>
-        <p>Search</p></span
-      >
-      <span
-        ><a href="createGroupsAndActivitiesPage"
-          ><i class="fa-solid fa-user-group"></i
-        ></a>
-        <p>Groups</p></span
-      >
-      <span id="settings"
-        ><a href="#"><i class="fa-solid fa-gear"></i></a>
-        <p>Settings</p></span
-      >
-      <span id="logout"
-        ><a href="/process-logout"
-          ><i class="fa-solid fa-arrow-right-from-bracket"></i
-        ></a>
-        <p>Logout</p></span
-      >
-    </div>
+  <div id="myNavFull" class = "navFull">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Menu</a>
+    <a href="/home">Home</a>
+    <a href="/searchGroupsAndActivitiesPage">Search</a>
+    <a href="/createGroupsAndActivitiesPage">Groups</a>
+    <a href="#" class = "settings">Settings</a>
+    <a href="/process-logout" class = logout>Logout</a>
+  </div>
 
-    <div class="addBox">
-      <div class="buttonBG">
-        <div id="buttons"></div>
-        <button
-          type="buton"
-          class="createButtons"
-          onclick="pullCreateActivity()"
-        >
-          Create Group
-        </button>
-        <button type="buton" class="createButtons" onclick="pullCreateGroup()">
-          Create Activity
-        </button>
+
+<div id = "groupSide">
+  <h1>Create a group</h1>
+  <p>Create a group for studying for classes, playing sports, gaming. or just for gatherings.</p>
+  <p>Create a group now by clicking the button below!!</p>
+</div>
+
+<div id = "activitySide">
+  <h1>Create an activity</h1>
+  <p>Create a activity for study sessions, sporting events, gaming tournaments, or for going out to meet new friends</p>
+  <p>Create a activity now by clicking the button below!!</p>
+</div>
+
+<button class="createButton" onclick="document.getElementById('groupMenu').style.display='block'" style="width:auto;">Create Group</button>
+
+<div id="groupMenu" class="modal">
+  <span onclick="document.getElementById('groupMenu').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="/createGroup" method="POST">
+    <div class="container">
+      <h1>Create A Group</h1>
+      <p>To create a group, please fill out this form.</p>
+      <hr>
+      <label for="name"><b>Name of Group</b></label>
+      <input type="text" placeholder="Enter name of group" name="groupName" required>
+
+      <label for="type"><b>Type<b></label>
+      <select id="type" name="type" required>
+        <option value="study">Study</option>
+        <option value="sports">Sports</option>
+        <option value="gaming">Gaming</option>
+        <option value="gathering">Gathering</option>
+      </select>
+
+      <label for="description"><b>Description</b></label>
+      <textarea id="description" placeholder="Describe your group... " name="description" required style="height:100px"></textarea></textarea>
+      
+
+      <p>By creating a group, you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('groupMenu').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="create" class="createbtn">Create</button>
       </div>
-      <form
-        class="groupsForm"
-        id="createGroup"
-        action="/createGroup"
-        method="POST"
-      >
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Group Name"
-          name="groupName"
-          required
-        />
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Type"
-          name="type"
-          required
-        />
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Description"
-          name="description"
-          required
-        />
-        <button type="submit" class="submitCreate">Create</button>
-      </form>
-      <form
-        class="activitiesForm"
-        id="createActivity"
-        action="/createActivity"
-        method="POST"
-      >
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Activity Name"
-          name="activityName"
-          required
-        />
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Type"
-          name="type"
-          required
-        />
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Description"
-          name="description"
-          required
-        />
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Location"
-          name="location"
-          required
-        />
-        <input
-          type="text"
-          class="groupInput"
-          placeholder="Time"
-          name="time"
-          required
-        />
-        <button type="submit" class="submitCreate">Create</button>
-      </form>
     </div>
+  </form>
+</div>
 
-    <script src="addingGroups.js"></script>
+<button class="createButton2" onclick="document.getElementById('activityMenu').style.display='block'" style="width:auto;">Create Activity</button>
+<div id="activityMenu" class="modal">
+  <span onclick="document.getElementById('activityMenu').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="/createActivity" method="POST">
+    <div class="container">
+      <h1>Create An Activity</h1>
+      <p>To create an activity, please fill out this form.</p>
+      <hr>
+      <label for="name"><b>Name of Activity</b></label>
+      <input type="text" placeholder="Enter name of activity" name="activityName" required>
+
+      <label for="type"><b>Type<b></label>
+      <select id="type" name="type" required>
+        <option value="study">Study</option>
+        <option value="sports">Sports</option>
+        <option value="gaming">Gaming</option> 
+        <option value="gathering">Gathering</option>
+      </select>
+
+      <label for="name"><b>Location</b></label>
+      <input type="text" placeholder="Enter Location of activity" name="location" required>
+
+      <label for="name"><b>Enter Time</b></label>
+      <input type="text" placeholder="Enter Time/Dates of activity" name="time" required>
+
+      <label for="description"><b>Description</b></label>
+      <textarea id="description" placeholder="Describe your activity... " name="description" required style="height:100px"></textarea></textarea>
+      
+
+      <p>By creating an activity, you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('activityMenu').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="create" class="createbtn">Create</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <!---
+  <h3>Create a Group</h3>
+
+  <div class = "container">
+    <form action="/action_page.php"></form>
+      <label for="name">Name</label>
+      <input type="text" id="fname" name="firstname" placeholder="Type name of Group">
+
+      <label for="type">Type</label>
+      <select id="type" name="type">
+        <option value="study">Study</option>
+        <option value="sports">Sports</option>
+        <option value="gaming">Gaming</option>
+        <option value="gathering">Gathering</option>
+      </select>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Describe this group..." style="height:100px"></textarea>
+
+      <input type="create" value="Create">
+    </form>
+  </div>
+-->
+
+  <script src="addingGroups.js"></script>
   </body>
 </html>

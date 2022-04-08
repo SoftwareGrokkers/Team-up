@@ -1,23 +1,43 @@
 const mongoose = require("mongoose");
 
-const userBuilder = new mongoose.Schema({
+// const userBuilder = new mongoose.Schema({
 	
-    firstname: String,
-    lastname: String,
-    gender: String,
-    email: String,
-    password: String,
-    phone: String,
-    street: String,
-    city: String,
-    state: String,
-    zipcode: Number,
-    activities: Array,
-    groups: Array,
+    // firstname: String,
+    // lastname: String,
+    // gender: String,
+    // email: String,
+    // password: String,
+    // phone: String,
+    // street: String,
+    // city: String,
+    // state: String,
+    // zipcode: Number,
+    // activities: Array,
+    // groups: Array,
     
-});
+// });
 
-
+class Team_upSchema{
+    userBuilder(){
+        var userBuilder = new mongoose.Schema({
+            
+            firstname: String,
+            lastname: String,
+            gender: String,
+            email: String,
+            password: String,
+            phone: String,
+            street: String,
+            city: String,
+            state: String,
+            zipcode: Number,
+            activities: Array,
+            groups: Array,
+            
+        });
+        return userBuilder
+    }
+}
 // const activityBuilder = new mongoose.Schema({
 	
     
@@ -41,8 +61,9 @@ const userBuilder = new mongoose.Schema({
     
     
 // });
-
-const users = mongoose.model("users", userBuilder);
+userB = new Team_upSchema()
+userBuilder = userB.userBuilder()
+var users = mongoose.model("users", userBuilder);
 // const activities = mongoose.model("Activities", activityBuilder);
 // const groups = mongoose.model("Groups", groupBuilder);
 module.exports = users

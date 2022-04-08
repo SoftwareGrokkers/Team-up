@@ -3,89 +3,165 @@
 body {
   font-family: "Work Sans", sans-serif;
 }
-
-.fa-solid {
-  font-size: 1.5em;
-  color: white;
-  margin: 1.8em 0.4em;
-}
-
-.fa-bars,
-.fa-x {
-  margin-top: 15px;
-}
-
-.nav .fa-gear {
-  position: absolute;
-  bottom: 4.2em;
-}
-
-#settings {
-  position: absolute;
-  bottom: 6em;
-}
-
-.nav .fa-arrow-right-from-bracket,
-#logout {
-  position: absolute;
-  bottom: 0em;
-}
-
-.nav,
-.navFull {
-  background: #121212;
-  border: 1px #121212 solid;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 93vh;
-}
-
-.navFull {
-  width: 12vw;
-  transition: all 0.3s linear;
-  transform: translateX(-100%);
-}
-
-.showNav {
-  transform: translateX(0);
-}
-
 .topBanner {
   background: linear-gradient(
     90deg,
-    rgba(0, 134, 138, 1) 0%,
-    rgba(0, 79, 115, 1) 46%,
-    rgba(48, 0, 79, 1) 100%
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
   );
-  width: 100vw;
-  height: 7vh;
   position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 7vh;
   top: 0;
   left: 0;
-
+  z-index: 3;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .topBanner h1 {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
-.navFull p {
-  display: inline;
-  color: white;
-  font-size: 1.5em;
-  margin-left: 0.5em;
+.dropdown {
+  position: absolute;
+  display: inline-block;
+  right: 2%;
+  top: 65px;
 }
 
-#groups,
-#activities {
-  width: 43vw;
-  padding: 5% 0 0 5%;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+
+.dropbtn {
+  background-color: #9e34db;
+  color: white;
+  padding: 1em;
+  font-size: 1em;
+  width: 160px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: #280544;
+}
+
+.nav {
+  background: linear-gradient(
+    180deg,
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
+  );
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 8%;
+  margin-top: 4vh;
+  left: 0;
+  align-items: center;
+}
+
+.nav a {
+  color: azure;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 25px;
+}
+
+.fa-gear {
+  position: relative;
+  top: 45vh;
+}
+
+.fa-arrow-right-from-bracket {
+  position: relative;
+  top: 45vh;
+}
+
+.nav a:hover {
+  color: rgb(240, 219, 36);
+}
+
+.navFull {
+  background: linear-gradient(
+    180deg,
+    rgba(185, 125, 227) 15%,
+    rgba(191, 76, 229) 46%,
+    rgba(48, 0, 79, 1) 80%
+  );
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 0;
+  margin-top: 4vh;
+  left: 8%;
+  align-items: center;
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index: 3;
+}
+.navFull a {
+  color: azure;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 25px;
+  transform: 0.3s;
+}
+
+.settings {
+  position: relative;
+  top: 45vh;
+}
+
+.logout {
+  position: relative;
+  top: 45vh;
+}
+
+.navFull a:hover {
+  color: rgb(240, 219, 36);
+}
+
+#groups {
+  list-style-type: none;
+  position: relative;
+  width: 80%;
+  height: 80%;
+  top: 80px;
+  left: 10%;
   display: flex;
   flex-wrap: wrap;
   float: left;
@@ -94,13 +170,36 @@ body {
 
 .group,
 .activity {
-  background-color: lightgray;
-  width: 25vw;
+  background-color: rgb(245, 245, 233);
+  border-style: solid;
+  border-color: blueviolet;
+  width: 20vw;
   margin-right: 30px;
-  height: 25vh;
+  height: 13vh;
   border-radius: 10px;
   margin: 30px;
+  transition: all .5s;
 }
+
+.group:hover, .activity:hover{
+  background-color: rgb(255, 255, 215);
+  width: 20.5vw;
+  height: 13vh;
+  box-shadow: 5px 2px 2px #121212;
+}
+
+.activity {
+  border-color: rgb(54, 105, 3);
+}
+
+a{
+  text-decoration: none;
+  color:black;
+  text-align: center;
+  transition: all .5s;
+}
+
+
 
 .groupActivityTitles {
   width: 43vw;
@@ -108,6 +207,12 @@ body {
 }
 
 .group h1,
-.group h1 {
+.activity h1 {
   text-align: center;
+  margin-bottom: .2em;
+  font-size: 1.5em;
+}
+
+.group p, .activity p{
+  margin: 0;
 }

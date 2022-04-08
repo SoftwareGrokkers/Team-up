@@ -11,14 +11,40 @@ navClose.addEventListener("click", () => {
   navFull.classList.remove("showNav");
 });
 
-var getActivityCookie = function(){
-    Cookies = document.cookie.split(";")
-    groupCookie = Cookies[1]
-    goodCookie = groupCookie.replace("%20", " ")
-    return goodCookie
-}
+class activityPage{
 
-var activityCookie = getActivityCookie()
+    getActivityCookie(document){
+        
+        var Cookies = document.cookie.split(";")
+        var groupCookie = Cookies[1]
+        var goodCookie = groupCookie.replace("%20", " ")
+        return goodCookie
+    }
+}
+class joinActivity{
+    joinButton(){
+        
+    }
+    linkActivity(){
+        
+    }
+}
+class attendingEvent{
+    #userChoice
+    returnUserChoice(){
+        
+    }
+}
+// class activityInfo{
+    // var activityDescription = document.createElement("p")
+// var activityCreator = document.createElement("p")
+// var activityLocation = document.createElement("h2")
+// var activityTime = document.createElement("h2")
+// var activityName = document.createElement("h2")
+// var activityType = document.createElement("h2")
+// }
+actpage = new activityPage()
+var activityCookie = actpage.getActivityCookie(document)
 
 var request = new XMLHttpRequest();
 const userActivitiesUrl = `http://localhost:3000/userActivityPage?cookie=${activityCookie}`

@@ -1,26 +1,64 @@
 // Open and close nav bar
-const navBtn = document.getElementById("navBtn");
-const navFull = document.getElementById("navFull");
-const navClose = document.getElementById("navClose");
+function openNav() {
+  document.getElementById("myNavFull").style.width = "125px";
+}
 
-navBtn.addEventListener("click", () => {
-  navFull.classList.add("showNav");
-});
+function closeNav() {
+  document.getElementById("myNavFull").style.width = "0";
+}
+// console.log(document.cookie)
+class groupPage{
+    getGroupCookie(docuement){
+        var Cookies = document.cookie.split(";")
+        var groupCookie = Cookies[1]
+        var goodCookie = groupCookie.replace("%20", " ")
+        return goodCookie
+    }
+    addMessagePrototype(){
+        var activityDescription = document.createElement("p")
+var activityCreator = document.createElement("p")
+var activityLocation = document.createElement("h2")
+var activityTime = document.createElement("h2")
+    }
+    printGroupInfo(groupCreator,groupDescription,groupName,grouptype){
+        var activityInfo = document.getElementById('activityInfo')
+var activityName = document.createElement("h1");
+var activitytype = document.createElement("h3")
+    }
+    
+}
 
-navClose.addEventListener("click", () => {
-  navFull.classList.remove("showNav");
-});
-console.log(document.cookie)
-var getGroupCookie = function(){
-    Cookies = document.cookie.split(";")
-    groupCookie = Cookies[1]
-    goodCookie = groupCookie.replace("%20", " ")
-    return goodCookie
+class messagePrototype{
+    #inputText;
+    #sampleMessage
+    MessagePrototype(input,div){
+        var Cookies = document.cookie.split(";")
+        var groupCookie = Cookies[1]
+        var goodCookie = groupCookie.replace("%20", " ")
+        return goodCookie
+    }
+}
+
+class _groupInfo{
+    #groupCreator
+    #groupDescription
+    #groupName
+    #groupType
+}
+
+class _joinGroup{
+    joinButton(){
+        //
+    }
+    linkGroup(){
+        //
+    }
 }
 // var getUserCookie = function(){
     // rawCookie = document.cookie
 // }
-var groupCookie = getGroupCookie()
+gppage = new groupPage()
+var groupCookie = gppage.getGroupCookie(document)
 var request = new XMLHttpRequest();
 const userGroupsUrl = `http://localhost:3000/userGroupPage?cookie=${groupCookie}`
 request.open('GET', userGroupsUrl, false)
@@ -56,4 +94,5 @@ function joinGroup() {
   // TODO
 
 }
+
 

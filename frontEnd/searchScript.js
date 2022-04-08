@@ -146,13 +146,123 @@ document.querySelector('.dropdown .title').addEventListener('change', handleTitl
 var searchResultsDiv = document.getElementById('searchResults');
 var searchInput = document.getElementById("searchBar")
 
-var getUserCookie = function(){
-    rawCookie = document.cookie
-    goodCookie = rawCookie.replace("%40","@")
-    return goodCookie
+class Search{
+    getUserCookie(document){
+        var rawCookie = document.cookie
+        var goodCookie = rawCookie.replace("%40","@")
+        return goodCookie
+    }
 }
 
-var userCookie = getUserCookie()
+class searchAlgorithmGroups{
+    groupsData(){
+        var userCookie = search.getUserCookie(document)
+var request = new XMLHttpRequest();;
+const GroupsUrl = `http://localhost:3000/allGroups?cookie=${userCookie}`
+const ActivitiesUrl = `http://localhost:3000/allActivities?cookie=${userCookie}`
+request.open('GET',GroupsUrl,false)
+request.send()
+    }
+    inputText(){
+        var userCookie = search.getUserCookie(document)
+var request = new XMLHttpRequest();;
+const GroupsUrl = `http://localhost:3000/allGroups?cookie=${userCookie}`
+const ActivitiesUrl = `http://localhost:3000/allActivities?cookie=${userCookie}`
+request.open('GET',GroupsUrl,false)
+request.send()
+    }
+}
+
+class _searchAlgorithmActivities{
+    groupsData(){
+        navClose.addEventListener("click", () => {
+  navFull.classList.remove("showNav");
+});
+
+    }
+    inputText(){
+        var join = document.getElementsByClassName("button")[0];
+join.addEventListener("click", joinGroup)
+    }
+    search(json,data){
+        var join = document.getElementsByClassName("button")[0];
+join.addEventListener("click", joinGroup)
+    }
+}
+
+class GroupRequest{
+    getGroupRequest(){
+        var activityDescription = document.createElement("p")
+var activityCreator = document.createElement("p")
+var activityLocation = document.createElement("h2")
+var activityTime = document.createElement("h2")
+    }
+}
+
+class DataRequest{
+    activitiesUrl(){
+        try{
+    var activityData = JSON.parse(request.responseText);
+    console.log(activityData)
+}
+catch(error){
+    var activityData = {Name: "Football Game", type : "Sport", description: "its a sport", creator: "John Smith", location: "Baton Rouge", time: "12 PM"}
+}
+    }
+    groupsUrl(){
+        var activityDescription = document.createElement("p")
+var activityCreator = document.createElement("p")
+var activityLocation = document.createElement("h2")
+var activityTime = document.createElement("h2")
+    }
+    getUserCookie(document){
+        var rawCookie = document.cookie
+        var goodCookie = rawCookie.replace("%40","@")
+        return goodCookie
+    }
+}
+class ActivityRequest{
+    getActivitiesRequest(req){
+        
+    }
+}
+class View{
+    handleOptionsSelected(){
+        try{
+    var activityData = JSON.parse(request.responseText);
+    console.log(activityData)
+}
+catch(error){
+    var activityData = {Name: "Football Game", type : "Sport", description: "its a sport", creator: "John Smith", location: "Baton Rouge", time: "12 PM"}
+}
+    }
+    handleTitleChange(){
+        try{
+    var activityData = JSON.parse(request.responseText);
+    console.log(activityData)
+}
+catch(error){
+    var activityData = {Name: "Football Game", type : "Sport", description: "its a sport", creator: "John Smith", location: "Baton Rouge", time: "12 PM"}
+}
+    }
+    toggleClass(){
+        var activityDescription = document.createElement("p")
+var activityCreator = document.createElement("p")
+var activityLocation = document.createElement("h2")
+var activityTime = document.createElement("h2")
+    }
+    toggleDisplay(){
+        
+    }
+    toggleMenuDisplay(){
+        var activityDescription = document.createElement("p")
+var activityCreator = document.createElement("p")
+var activityLocation = document.createElement("h2")
+var activityTime = document.createElement("h2")
+    }
+}
+search = new Search()
+var userCookie = search.getUserCookie(document)
 var request = new XMLHttpRequest();;
 const GroupsUrl = `http://localhost:3000/allGroups?cookie=${userCookie}`
 const ActivitiesUrl = `http://localhost:3000/allActivities?cookie=${userCookie}`

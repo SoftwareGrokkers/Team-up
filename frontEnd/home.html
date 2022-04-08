@@ -14,54 +14,40 @@
   <body>
     <div class="topBanner">
       <h1>Team Up</h1>
+      
+      <div class="dropdown">
+        <button onclick="dropMenu()" class="dropbtn">Filter</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#" class = "btn active" onClick="filterSelection('All')">All</a>
+          <a href="#" class="btn" onclick="activityFilterSelection('group')">Groups</a>
+          <a href="#" class="btn" onclick="groupFilterSelection('activity')">Activities</a>
+        </div>
+      </div>
     </div>
-    <div class="nav">
-      <span id="navBtn"
-        ><a href="#"><i class="fa-solid fa-bars"></i></a
-      ></span>
+
+
+    <div class = "nav">
+      <a href="#"><i class="fa-solid fa-bars" onclick="openNav()"></i></a>
       <a href="/home"><i class="fa-solid fa-house"></i></a>
       <a href="/searchGroupsAndActivitiesPage"><i class="fa-solid fa-magnifying-glass"></i></a>
       <a href="/createGroupsAndActivitiesPage"><i class="fa-solid fa-user-group"></i></a>
-      <a href="#"><i class="fa-solid fa-gear"></i></a>
-      <a href="/process-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-    </div>
+      <a href="#" class="fa-solid fa-gear"></a>
+      <a href="/process-logout" class="fa-solid fa-arrow-right-from-bracket"></a>
+  </div>
 
-    <div class="navFull" id="navFull">
-      <span id="navClose"
-        ><i class="fa-solid fa-bars"></i>
-        <p>Menu</p></span
-      >
+  <div id="myNavFull" class = "navFull">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Menu</a>
+      <a href="/home">Home</a>
+      <a href="/searchGroupsAndActivitiesPage">Search</a>
+      <a href="/createGroupsAndActivitiesPage">Groups</a>
+      <a href="#" class = "settings">Settings</a>
+      <a href="/process-logout" class = logout>Logout</a>
+  </div>
 
-      <span
-        ><a href="/home"><i class="fa-solid fa-house"></i></a>
-        <p>Home</p></span
-      >
-      <span
-        ><a href="/searchGroupsAndActivitiesPage"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <p>Search</p></span
-      >
-      <span
-        ><a href="/createGroupsAndActivitiesPage"><i class="fa-solid fa-user-group"></i></a>
-        <p>Groups</p></span
-      >
-      <span id="settings"
-        ><a href="#"><i class="fa-solid fa-gear"></i></a>
-        <p>Settings</p></span
-      >
-      <span id="logout"
-        ><a href="/process-logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        <p>Logout</p></span
-      >
-    </div>
+
 
     <div id="groups">
-      <h1 class="groupActivityTitles">Groups<br></h1>
       
-    </div>
-
-    <div id="activities">
-      <h1 class="groupActivityTitles">Activities<br></h1>
-      <!-- <div class="activity"></div> -->
     </div>
 
     <script src="homescript.js"></script>
