@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Up</title>
+    <script
+      src="https://kit.fontawesome.com/a9e1b499ba.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="activityPageStyles.css" />
+  </head>
+  <body>
+    <div class="topBanner">
+      <h1>Team Up</h1>
+    </div>
+    <div class="nav">
+      <span id="navBtn"
+        ><a href="#"><i class="fa-solid fa-bars"></i></a
+      ></span>
+      <a href="/home"><i class="fa-solid fa-house"></i></a>
+      <a href="/searchGroupsAndActivitiesPage"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></a>
+      <a href="createGroupsAndActivitiesPage"
+        ><i class="fa-solid fa-user-group"></i
+      ></a>
+      <a href="#"><i class="fa-solid fa-gear"></i></a>
+      <a href="/process-logout"
+        ><i class="fa-solid fa-arrow-right-from-bracket"></i
+      ></a>
+    </div>
+
+    <div class="navFull" id="navFull">
+      <span id="navClose"
+        ><i class="fa-solid fa-bars"></i>
+        <p>Menu</p></span
+      >
+
+      <span
+        ><a href="/home"><i class="fa-solid fa-house"></i></a>
+        <p>Home</p></span
+      >
+      <span
+        ><a href="/searchGroupsAndActivitiesPage"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></a>
+        <p>Search</p></span
+      >
+      <span
+        ><a href="createGroupsAndActivitiesPage"
+          ><i class="fa-solid fa-user-group"></i
+        ></a>
+        <p>Groups</p></span
+      >
+      <span id="settings"
+        ><a href="#"><i class="fa-solid fa-gear"></i></a>
+        <p>Settings</p></span
+      >
+      <span id="logout"
+        ><a href="/process-logout"
+          ><i class="fa-solid fa-arrow-right-from-bracket"></i
+        ></a>
+        <p>Logout</p></span
+      >
+    </div>
+
+    <div id="activityInfo"></div>
+
+    <a href= "/leaveActivity" class="button">Leave Activity</a>
+
+    <h2 class="question">Will you be attending this event?</h2>
+
+    <div class="radio-toolbar">
+      <input type="radio" id="Yes" name="radioCheck" value="yes" checked />
+      <label for="Yes">Yes</label>
+
+      <input type="radio" id="No" name="radioCheck" value="no" />
+      <label for="No">No</label>
+    </div>
+
+    <script src="activityPageScript.js"></script>
+  </body>
+</html>

@@ -76,8 +76,8 @@ var grouptype = document.createElement("h3")
 var groupDescription = document.createElement("p")
 var groupCreator = document.createElement("p")
 
-groupName.appendChild(document.createTextNode("Group: " + groupData.Name));
-grouptype.appendChild(document.createTextNode("Type: " + groupData.type));
+groupName.appendChild(document.createTextNode(groupData.Name));
+grouptype.appendChild(document.createTextNode(groupData.type));
 groupDescription.appendChild(document.createTextNode(groupData.description));
 groupCreator.appendChild(document.createTextNode("Creator: " + groupData.creator));
 

@@ -227,7 +227,7 @@ for (let i = 0; i < groupsData.length; i++) {
   var groupdiv = document.createElement('div');
   var link = document.createElement('a');
   
-  link.href = `/openGroupPage?groupName=${groupsData[i].Name}`
+  link.href = `/openHomeGroupPage?groupName=${groupsData[i].Name}`
   // link.href = "/openGroupPage?"
   
   groupdiv.classList.add('group');
@@ -253,7 +253,7 @@ for (let i = 0; i < activitiesData.length; i++) {
   var groupdiv = document.createElement('div');
   var link = document.createElement('a')
   
-  link.href = `/openActivityPage?activityName=${activitiesData[i].Name}`
+  link.href = `/openHomeActivityPage?activityName=${activitiesData[i].Name}`
   // link.href = "/openActivityPage"
   
   groupdiv.classList.add('activity');

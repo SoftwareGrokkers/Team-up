@@ -125,6 +125,19 @@ app.get('/openGroupPage*', function(req,res){
     }
 })
 
+app.get('/openHomeGroupPage*', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    else{
+        res.cookie("groupName",req.query.groupName,{maxAge:900000})
+        res.sendFile(frontEndPath+'/leavegroupPage.html');
+    }
+})
 
 app.get('/openActivityPage*', function(req,res){
     var userCookie = req.cookies
@@ -137,6 +150,21 @@ app.get('/openActivityPage*', function(req,res){
     else{
         res.cookie("activityName",req.query.activityName,{maxAge:900000})
         res.sendFile(frontEndPath+'/activityPage.html');
+    }
+})
+
+///////////////////////////////
+app.get('/openHomeActivityPage*', function(req,res){
+    var userCookie = req.cookies
+    
+    
+    if (userCookie.userEmail == null){
+        res.redirect('/')
+        console.log("not logged in")
+    }
+    else{
+        res.cookie("activityName",req.query.activityName,{maxAge:900000})
+        res.sendFile(frontEndPath+'/leaveactivityPage.html');
     }
 })
 
@@ -587,6 +615,50 @@ app.get('/joinGroup', function(req,res){
 })
 
 
+app.get('/leaveGroup', function(req,res){
+    var groupCookie = req.cookies
+    
+    Team_upGroups.find({"Name":groupCookie.groupName}, function(err, Team_upGroup){
+        var group = Team_upGroup[0]
+        
+        Team_upUsers.find({email:groupCookie.userEmail}, function(err, Team_upUser){
+            var groupList = []
+            
+            for (var i = 0; i<Team_upUser[0].groups.length; i++){
+                if(Team_upUser[0].groups[i].Name != group.Name){
+                    groupList.push(Team_upUser[0].groups[i])
+                }
+            }
+            
+            
+            var update = {
+                groups: groupList
+            }
+            
+            var filter = {"email":groupCookie.userEmail}
+            
+            Team_upUsers.findOneAndUpdate(filter,update,function(err,doc){
+                console.log("successfully updated")
+                
+                // if(groupCookie.userEmail == group.creator){
+                    // var groupfilter = {"Name": group.Name}
+                    
+                    // Team_upGroups.deleteMany(groupfilter, function(err,doc){
+                        // console.log("successfully deleted")
+                    // })
+                // }
+            })
+            
+            
+            
+        })
+        
+        
+    })
+    res.clearCookie('groupName')
+    res.redirect("/home")
+})
+
 
 app.get('/joinActivity', function(req,res){
     var activityCookie = req.cookies
@@ -625,6 +697,48 @@ app.get('/joinActivity', function(req,res){
         })
     })
     
+    res.redirect("/home")
+})
+
+
+
+
+app.get('/leaveActivity', function(req,res){
+    var activityCookie = req.cookies
+    
+    Team_upActivities.find({"Name":activityCookie.activityName}, function(err, Team_upActivity){
+        var activity = Team_upActivity[0]
+        
+        Team_upUsers.find({email:activityCookie.userEmail}, function(err, Team_upUser){
+            var activityList = []
+            
+            for(var i=0; i<Team_upUser[0].activities.length; i++){
+                if(Team_upUser[0].activities[i].Name != activity.Name){
+                    activityList.push(Team_upUser[0].activities[i])
+                }
+            }
+            
+            var update = {
+                activities: activityList
+            }
+            
+            var filter = {"email":activityCookie.userEmail}
+            
+            Team_upUsers.findOneAndUpdate(filter,update,function(err,doc){
+                console.log("successfully updated")
+                
+                
+                // if(activityCookie.userEmail == activity.creator){
+                    // var activityfilter = {"Name": activity.Name}
+                    
+                    // Team_upActivities.deleteMany(activityfilter, function(err,doc){
+                        // console.log("successfully deleted")
+                    // })
+                // }
+            })
+        })
+    })
+    res.clearCookie('activityName')
     res.redirect("/home")
 })
 
@@ -836,6 +950,16 @@ app.post('/createActivity', function(req,res){
     }
 })
 
+
+app.get('/terms_and_cond', function(req,res){
+    var userCookie = req.cookies
+    if (userCookie.userEmail == null){
+        // res.json({})
+        console.log("not logged in")
+        res.sendFile(frontEndPath+'/index.html');
+    }
+    res.sendFile(frontEndPath+'/eegg2.html')
+})
 
 app.get('/process-logout', function(req,res){
     var userCookie = req.cookies
